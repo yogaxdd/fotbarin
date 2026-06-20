@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Fotbarin - Create Cute Photobooth Strips</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Quicksand:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface": "#fcf9f8",
+                        "on-primary-fixed": "#2d141c",
+                        "on-background": "#1c1b1b",
+                        "inverse-primary": "#e7bbc6",
+                        "on-secondary-fixed": "#2a1131",
+                        "surface-container": "#f0eded",
+                        "on-primary": "#ffffff",
+                        "outline-variant": "#d3c3c5",
+                        "secondary": "#725477",
+                        "primary-container": "#ffd1dc",
+                        "on-tertiary-container": "#39686d",
+                        "on-secondary-container": "#77587c",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-container": "#b5e5eb",
+                        "on-secondary-fixed-variant": "#593d5f",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary-fixed": "#bbebf1",
+                        "primary-fixed": "#ffd9e2",
+                        "secondary-container": "#fad3fd",
+                        "primary-fixed-dim": "#e7bbc6",
+                        "surface-tint": "#78555e",
+                        "secondary-fixed": "#fcd7ff",
+                        "surface-container-highest": "#e5e2e1",
+                        "outline": "#817476",
+                        "on-tertiary-fixed": "#001f23",
+                        "on-surface": "#1c1b1b",
+                        "inverse-surface": "#313030",
+                        "on-error": "#ffffff",
+                        "tertiary": "#37656b",
+                        "on-primary-fixed-variant": "#5e3e47",
+                        "on-tertiary-fixed-variant": "#1d4d53",
+                        "secondary-fixed-dim": "#dfbbe4",
+                        "inverse-on-surface": "#f3f0ef",
+                        "surface-container-high": "#eae7e7",
+                        "on-secondary": "#ffffff",
+                        "on-surface-variant": "#4f4446",
+                        "tertiary-fixed-dim": "#9fcfd5",
+                        "background": "#fcf9f8",
+                        "on-primary-container": "#7a5761",
+                        "primary": "#78555e",
+                        "error": "#ba1a1a",
+                        "surface-dim": "#dcd9d9",
+                        "surface-bright": "#fcf9f8",
+                        "on-error-container": "#93000a",
+                        "surface-variant": "#e5e2e1",
+                        "surface-container-low": "#f6f3f2",
+                        "error-container": "#ffdad6"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "base": "4px",
+                        "md": "24px",
+                        "lg": "40px",
+                        "margin-mobile": "20px",
+                        "margin-desktop": "auto",
+                        "xs": "8px",
+                        "gutter": "16px",
+                        "sm": "16px",
+                        "xl": "64px"
+                    },
+                    "fontFamily": {
+                        "label-bold": ["Inter"],
+                        "body-md": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "display-lg-mobile": ["Quicksand"],
+                        "headline-sm": ["Quicksand"],
+                        "display-lg": ["Quicksand"],
+                        "body-lg": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "headline-md": ["Quicksand"]
+                    },
+                    "fontSize": {
+                        "label-bold": ["14px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "500" }],
+                        "display-lg-mobile": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .glass-panel {
+            background-color: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+        
+        .sticker-shadow {
+            box-shadow: 4px 4px 0px 0px rgba(0,0,0,1);
+        }
+        
+        .sticker-shadow-hover:active {
+            box-shadow: 0px 0px 0px 0px rgba(0,0,0,1);
+            transform: translate(4px, 4px);
+        }
+
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        
+        .sticker-border {
+            -webkit-text-stroke: 3px white;
+            paint-order: stroke fill;
+            filter: drop-shadow(2px 2px 0px rgba(0,0,0,0.1));
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-background font-body-md min-h-screen flex flex-col relative overflow-x-hidden selection:bg-primary-container selection:text-on-primary-container">
+<!-- TopNavBar (Web) -->
+<header class="hidden md:flex fixed top-0 w-full z-50 justify-between items-center px-lg h-20 max-w-[1200px] mx-auto bg-surface/70 backdrop-blur-xl border-b-2 border-on-background shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+<a class="font-display-lg text-display-lg text-primary tracking-tight" href="#">Fotbarin</a>
+<nav class="flex gap-md items-center">
+<a class="text-on-surface-variant font-body-md hover:text-primary transition-colors" href="#">Templates</a>
+<a class="text-on-surface-variant font-body-md hover:text-primary transition-colors" href="#">Community</a>
+<a class="text-on-surface-variant font-body-md hover:text-primary transition-colors" href="#">Pricing</a>
+<a class="text-on-surface-variant font-body-md hover:text-primary transition-colors" href="#">Login</a>
+<button class="bg-primary-container text-on-primary-container border-2 border-on-background px-md py-xs rounded-full font-label-bold sticker-shadow sticker-shadow-hover transition-all">Start Shooting</button>
+</nav>
+</header>
+<!-- Main Content -->
+<main class="flex-grow pt-24 md:pt-32 pb-32">
+<!-- Hero Section -->
+<section class="max-w-[1200px] mx-auto px-margin-mobile md:px-lg flex flex-col md:flex-row items-center justify-between gap-lg mb-xl relative">
+<!-- Decorative Stickers -->
+<span class="material-symbols-outlined text-4xl text-primary absolute top-10 left-10 hidden md:block sticker-border z-0" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-5xl text-tertiary absolute bottom-10 right-1/2 hidden md:block sticker-border z-0" style="font-variation-settings: 'FILL' 1;">favorite</span>
+<div class="flex-1 flex flex-col gap-md z-10">
+<div class="inline-flex items-center gap-xs bg-surface-container-highest border-2 border-on-background rounded-full px-sm py-1 w-fit sticker-shadow">
+<span class="material-symbols-outlined text-primary text-sm" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+<span class="font-label-bold text-label-bold text-on-surface-variant">Photos are processed locally</span>
+</div>
+<h1 class="font-display-lg-mobile md:font-display-lg text-display-lg-mobile md:text-display-lg text-on-background leading-tight">
+                    Create cute photobooth strips in your browser
+                </h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-lg">
+                    Pick a template, take your shots, and download instantly. No app. No photo upload. Privacy-first.
+                </p>
+<div class="flex flex-wrap gap-sm mt-xs">
+<button class="bg-primary-container text-on-primary-container border-2 border-on-background px-lg py-sm rounded-xl font-label-bold text-label-bold sticker-shadow sticker-shadow-hover transition-all flex items-center gap-xs">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">camera</span>
+                        Start Shooting
+                    </button>
+<button class="bg-surface text-on-background border-2 border-on-background px-lg py-sm rounded-xl font-label-bold text-label-bold sticker-shadow sticker-shadow-hover transition-all hover:bg-surface-container-low">
+                        Explore Templates
+                    </button>
+</div>
+<div class="mt-sm bg-error-container border-2 border-on-background rounded-xl p-sm inline-flex items-start gap-xs max-w-md sticker-shadow">
+<span class="material-symbols-outlined text-on-error-container mt-1">shield_lock</span>
+<p class="font-body-sm text-body-sm text-on-error-container">
+<strong>Privacy-First:</strong> Your photos stay in your browser. We never upload or store your photos.
+                    </p>
+</div>
+</div>
+<div class="flex-1 flex justify-center z-10 mt-lg md:mt-0">
+<div class="relative w-64 md:w-80 h-[500px] md:h-[600px] bg-white border-2 border-on-background rounded-xl p-sm sticker-shadow flex flex-col gap-xs rotate-2 hover:rotate-0 transition-transform duration-300">
+<!-- Photobooth Strip Mockup -->
+<div class="absolute -top-4 -right-4 bg-tertiary-container border-2 border-on-background rounded-full p-2 sticker-shadow z-20">
+<span class="material-symbols-outlined text-on-tertiary-container" style="font-variation-settings: 'FILL' 1;">favorite</span>
+</div>
+<div class="flex-1 bg-surface-container border-2 border-outline-variant rounded-lg overflow-hidden relative">
+<img class="w-full h-full object-cover" data-alt="A medium shot portrait of a cute, stylish Gen Z person smiling and holding up peace signs. Soft pastel lighting, light mode aesthetic, high quality, vibrant." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCZFa0eUOkOCsxRr2Y2_KPSd6zF_B7LKSkLLT8fR2l8cYINVZ7sm3rIOp4J4_y4cUWof-iEva14WDpGXcHpARClGE1hxU-wdb00gckyXKqsDaFKIcZR4iQAoSYYOaa0XTEM5jvVBSrRL_AbcUJQFhQ46-1Q4gSf8--UY8AO4jgLHws8wzUZlxQkJqJDQ2FXw9JStbIJQ4DnorUnXTAMcrmMeU8MmVMO-Q4meC80DVUsxm0uNobONxJFbG_Gr6nxtWmvwX0s0JAHBvPC"/>
+</div>
+<div class="flex-1 bg-surface-container border-2 border-outline-variant rounded-lg overflow-hidden relative">
+<img class="w-full h-full object-cover" data-alt="A medium shot portrait of a cute, stylish Gen Z person making a silly face and winking. Soft pastel lighting, light mode aesthetic, high quality, vibrant." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBN9Ls6ByqJQE4oLeT94oChOVA0JrbE-elWXC1Fzpb4PCkLSJQj0yApgYCkpasAYcWpWdX4Qzg8ObvwIZASx1xKKr8ga3D1DSwnI0KOz0uV20selNOUbE5fVyxuxZyinoNfYmoNtBvSpchN6QACUR0CHXMUf6-rIPGHL8WdFH8e4b9CmZH_5FaAFHaXgh0vS3iJIevK_PHv6NTkampxbx_VdZ2--fhJYTr9-fNy0Al5zrnaNIvnwGZu3Yvt8NzOA5XJ9Wv6vcsVVDmP"/>
+</div>
+<div class="flex-1 bg-surface-container border-2 border-outline-variant rounded-lg overflow-hidden relative">
+<img class="w-full h-full object-cover" data-alt="A medium shot portrait of two cute, stylish Gen Z friends hugging and laughing. Soft pastel lighting, light mode aesthetic, high quality, vibrant." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD8n8iW-kPd78UpMO-VSFlPX5tqN3jZxUzXqECbSdaO802m8yYp_iLqprQT1cU_XdM5SbBfVFUFoefwLqswkrReZUJJC9L8dZThLlKGw7MiZ8TNS5W4OnqE3DB9ctbB6BhDMcbdqT7cwAMk_dSCyI5tcC8pEcqADgYZ1q9aJr_ZyS5VDLdKOuSb2Xh-q9lvb3foFJ-P8XkW2q1cETGWbGOeBGXCJd-W7Kdx-HHSTuzw9LnzUTSGK_Y41Kn2u4kwOs2zckcTRhqXBFzk"/>
+</div>
+<div class="flex-1 bg-surface-container border-2 border-outline-variant rounded-lg overflow-hidden relative">
+<img class="w-full h-full object-cover" data-alt="A medium shot portrait of a cute, stylish Gen Z person making a heart shape with their hands. Soft pastel lighting, light mode aesthetic, high quality, vibrant." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDY7xzl4QpgcllSec-PVe2x6179X2tu2K7iYxw8hh8voo4zNWi36pSFId3RAzcElFgi0Vbo3D0LmVm_Jxk_NhtZqMA0uoqEbrF38kSNkA1wSDl5iW_BY2UHgBLDvECV3hbYG03wLwrhB9w_FkVaiBRwnjhe1e2YBc3rxYJMkbjiismAVRSWTFROd7V7OmqdIE8DgljlOaoI80zzFB9yoJjohcGuWUwQPLw9VS9ql0ezUTd2DBQL6rp7RBeMkg0_rZ1kTce7ePy0lJb4"/>
+</div>
+<div class="h-12 flex items-center justify-center border-t-2 border-outline-variant mt-xs pt-xs">
+<span class="font-display-lg-mobile text-xl text-primary tracking-tighter">Fotbarin</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Features Bento Grid -->
+<section class="max-w-[1200px] mx-auto px-margin-mobile md:px-lg mb-xl">
+<h2 class="font-headline-sm text-headline-sm md:font-headline-md md:text-headline-md text-on-background mb-md">Why use Fotbarin?</h2>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-md">
+<!-- Feature 1 -->
+<div class="bg-white border-2 border-on-background rounded-xl p-md sticker-shadow flex flex-col gap-sm hover:-translate-y-1 transition-transform">
+<div class="w-12 h-12 bg-secondary-container border-2 border-on-background rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-on-secondary-container" style="font-variation-settings: 'FILL' 1;">no_photography</span>
+</div>
+<h3 class="font-label-bold text-label-bold text-on-background text-lg">No photo storage</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Everything happens in your browser. We don't have servers to store your selfies.</p>
+</div>
+<!-- Feature 2 -->
+<div class="bg-white border-2 border-on-background rounded-xl p-md sticker-shadow flex flex-col gap-sm hover:-translate-y-1 transition-transform md:col-span-2">
+<div class="w-12 h-12 bg-tertiary-container border-2 border-on-background rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-on-tertiary-container" style="font-variation-settings: 'FILL' 1;">wallpaper</span>
+</div>
+<h3 class="font-label-bold text-label-bold text-on-background text-lg">Community frames</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Access hundreds of cute templates designed by the community. Y2K, pastel, anime, minimalist—find your aesthetic.</p>
+</div>
+<!-- Feature 3 -->
+<div class="bg-white border-2 border-on-background rounded-xl p-md sticker-shadow flex flex-col gap-sm hover:-translate-y-1 transition-transform md:col-span-2">
+<div class="w-12 h-12 bg-primary-container border-2 border-on-background rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-on-primary-container" style="font-variation-settings: 'FILL' 1;">edit</span>
+</div>
+<h3 class="font-label-bold text-label-bold text-on-background text-lg">Custom frame editor</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Want something unique? Use our easy editor to add stickers, text, and colors to create your perfect photobooth strip.</p>
+</div>
+<!-- Feature 4 -->
+<div class="bg-white border-2 border-on-background rounded-xl p-md sticker-shadow flex flex-col gap-sm hover:-translate-y-1 transition-transform">
+<div class="w-12 h-12 bg-surface-variant border-2 border-on-background rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-on-surface-variant" style="font-variation-settings: 'FILL' 1;">flip</span>
+</div>
+<h3 class="font-label-bold text-label-bold text-on-background text-lg">No-mirror export</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">We fix the front-camera flip so text on your clothes is actually readable.</p>
+</div>
+<!-- Feature 5 -->
+<div class="bg-white border-2 border-on-background rounded-xl p-md sticker-shadow flex flex-col gap-sm hover:-translate-y-1 transition-transform">
+<div class="w-12 h-12 bg-secondary-fixed border-2 border-on-background rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-on-secondary-fixed" style="font-variation-settings: 'FILL' 1;">smartphone</span>
+</div>
+<h3 class="font-label-bold text-label-bold text-on-background text-lg">Mobile friendly</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Works perfectly on your phone's browser. No need to download yet another app.</p>
+</div>
+<!-- Feature 6 -->
+<div class="bg-white border-2 border-on-background rounded-xl p-md sticker-shadow flex flex-col gap-sm hover:-translate-y-1 transition-transform md:col-span-2">
+<div class="w-12 h-12 bg-tertiary-fixed border-2 border-on-background rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-on-tertiary-fixed" style="font-variation-settings: 'FILL' 1;">download</span>
+</div>
+<h3 class="font-label-bold text-label-bold text-on-background text-lg">Instant download</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Grab your final high-res strip instantly. Ready to share on IG or print out for your journal.</p>
+</div>
+</div>
+</section>
+<!-- Template Preview Carousel -->
+<section class="mb-xl overflow-hidden relative py-md">
+<div class="max-w-[1200px] mx-auto px-margin-mobile md:px-lg mb-md flex justify-between items-end">
+<h2 class="font-headline-sm text-headline-sm md:font-headline-md md:text-headline-md text-on-background">Trending Templates</h2>
+<a class="font-label-bold text-label-bold text-primary hover:underline" href="#">View all</a>
+</div>
+<div class="flex overflow-x-auto gap-md px-margin-mobile md:px-lg hide-scrollbar pb-lg snap-x">
+<!-- Template Card 1 -->
+<div class="min-w-[200px] md:min-w-[240px] snap-center shrink-0 flex flex-col gap-sm">
+<div class="bg-[#FDF2F8] border-2 border-on-background rounded-xl p-2 h-72 sticker-shadow flex flex-col gap-2 relative">
+<div class="absolute -top-3 -right-3 bg-white border-2 border-on-background rounded-full px-2 py-1 font-label-sm text-label-sm sticker-shadow z-10">Y2K</div>
+<div class="flex-1 bg-surface-container border 1px border-outline-variant rounded-md overflow-hidden">
+<img class="w-full h-full object-cover opacity-50" data-alt="A cute kawaii pattern with pink stars and sparkles on a light background. Light mode, pastel colors, soft edges, high quality." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA69Zt2rqalQzbcJs1yKmeuBnSS8_fo0cKXNJs-FpJK4mtu-DgQmG05PAwElgeeIFTGMU42D9tOoA8ZvaylNktO3NU8EAOdxbHXK0NyQa_aOurCBz4a0Q1IOK4rIXC9uaq9friaGa2ECF2LuV6n1r5RFcLNPYrN3EWifuBLwVzSInQHupt7KkFowwHGzs_z9fB8oRFlm8J4BWIRxhRaUcggVrsnz29RC-PewTMQryrsIa8Co886v5l5eH8iRNk3wRiJ5BCRHXx2h_u2"/>
+</div>
+<div class="flex-1 bg-surface-container border 1px border-outline-variant rounded-md overflow-hidden">
+<img class="w-full h-full object-cover opacity-50" data-alt="A cute kawaii pattern with pink stars and sparkles on a light background. Light mode, pastel colors, soft edges, high quality." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC-e6InvhXDLzW5FbfWsWw1-M__OYMMvKSn5OlVG34zFnrKwDJX3bAzgjggdgS4z078aCrpGguTe5oG5Zd3EoVaOFciZFU09A_Afa5LDj3VN_MoFb5ZNMyvGfCs-ZDrVQOawpBwNhnwJql1uf7uwExWGy4aGVH6rtNtYL1McWR2FZHTJtO8RAKhoNSg7VnieyMfFD_zPXgUMA03jJAJ7ldI0vwDgOlcofYhCsmhH2j57AkbYD_-U6nm-5nTP71SQksTnsiw8XbOhKZj"/>
+</div>
+<div class="flex-1 bg-surface-container border 1px border-outline-variant rounded-md overflow-hidden">
+<img class="w-full h-full object-cover opacity-50" data-alt="A cute kawaii pattern with pink stars and sparkles on a light background. Light mode, pastel colors, soft edges, high quality." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBev5vgf9HZ2HVodECb5_6QSuSDycNGWA41Rwwian1IPVT1E1C5eaqwZn9n5vihFWN_NxfpyBIheXA4iD_pN00xQZ06nZtuxB0jE7uyuJuubbHL2M5TlKiK60njLlRj3RhxA1ORr83vI8bkXQKN5YH2ZU_oitFMXpsgY-CMhrBDsYHi2trNtEUT6k70HoupyEtXcwZoEEXitLaqHcpQkmWpRBJsw8lOK2vGnaIZCoslEEGIHW7T7i4Wqaq7N1xakMtrH3CgJwOYxlUV"/>
+</div>
+</div>
+<span class="font-label-bold text-label-bold text-center">Star Girl</span>
+</div>
+<!-- Template Card 2 -->
+<div class="min-w-[200px] md:min-w-[240px] snap-center shrink-0 flex flex-col gap-sm">
+<div class="bg-[#EFF6FF] border-2 border-on-background rounded-xl p-2 h-72 sticker-shadow flex flex-col gap-2 relative">
+<div class="absolute -top-3 -right-3 bg-white border-2 border-on-background rounded-full px-2 py-1 font-label-sm text-label-sm sticker-shadow z-10">Anime</div>
+<div class="flex-1 bg-surface-container border 1px border-outline-variant rounded-md overflow-hidden">
+<img class="w-full h-full object-cover opacity-50" data-alt="A minimal soft blue sky with fluffy white anime-style clouds. Light mode, pastel colors, soft edges, high quality." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCwRc4qxCQEzz1wBNXlWzNsOWMH_-dmrfmorAJpodCXVBCgIJu1p__8jfwbIF6NVYEt-Q1FAirE9f_x-j4-Oy44RFgpoSfzFXg4MUmMPxOFei-d9QFq7S8ijU8CDvg5h-yMUalIxe-_qDguQ0A5c8MbiiSit_qez1fkrBTRiyJjJIECXmIccIcha7tNkxRCbN-gvX3zs5hb0Fsc2H7ryRtCv02J9aaHKEW9IiFP3HviTJHx8_MJ0EezTFRe2ldIr1UmINPDd7ckixVM"/>
+</div>
+<div class="flex-1 bg-surface-container border 1px border-outline-variant rounded-md overflow-hidden">
+<img class="w-full h-full object-cover opacity-50" data-alt="A minimal soft blue sky with fluffy white anime-style clouds. Light mode, pastel colors, soft edges, high quality." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBXsuHT9x4tlBUPDDMYU7-De4KR01RR6vHKN7k5GYVOAFi7U_1cawyokxGNWTZJFQ021M4f8qwvFb7igr__0j1ly03umzvS9dWDPVoS7qFwFTdkTDsYNq2jNJeNqEK_XrSNjzEm0RzGBk2qA2R8CXHloo6Ag01tB3xxSQO2KGwbSkavhudlirDZkS2tnwFpKouYpSRY0b1tn6gi_Crel-982TuHkG9sPClq273DAQ8NCDLJ6QD0SW7OHxwbdY-3eIfXfV0DOzdpdoC7"/>
+</div>
+<div class="flex-1 bg-surface-container border 1px border-outline-variant rounded-md overflow-hidden">
+<img class="w-full h-full object-cover opacity-50" data-alt="A minimal soft blue sky with fluffy white anime-style clouds. Light mode, pastel colors, soft edges, high quality." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCXofqOTBYL1Pfduk0ceNpbKFcBd92lh9WvjXLz1IsiE23jCWvXA8CmvVM8UQUkx5o7cASZMwBRFQhIAsbvJuwH5oPijRsoUFK4lvvMkEIBHUV8vYlA-0wa6OXmSHf9YxlBay5f4A-bERCwpmcksprt4sUxCuVnoYWkSA6sIGvcdGHmLxiNqi5KG1ShChNV1wV-lO6jRvqX2SVTa1AcMeAlCUyCjGqUz67VODjV27bKShfjm8MMW3svK-v5UvpDMyhVGMoNuqdGJs-h"/>
+</div>
+</div>
+<span class="font-label-bold text-label-bold text-center">Cloud Nine</span>
+</div>
+<!-- Template Card 3 -->
+<div class="min-w-[200px] md:min-w-[240px] snap-center shrink-0 flex flex-col gap-sm">
+<div class="bg-[#F0FDF4] border-2 border-on-background rounded-xl p-2 h-72 sticker-shadow flex flex-col gap-2 relative">
+<div class="absolute -top-3 -right-3 bg-white border-2 border-on-background rounded-full px-2 py-1 font-label-sm text-label-sm sticker-shadow z-10">Minimal</div>
+<div class="flex-1 bg-surface-container border 1px border-outline-variant rounded-md overflow-hidden"></div>
+<div class="flex-1 bg-surface-container border 1px border-outline-variant rounded-md overflow-hidden"></div>
+<div class="flex-1 bg-surface-container border 1px border-outline-variant rounded-md overflow-hidden"></div>
+</div>
+<span class="font-label-bold text-label-bold text-center">Matcha Basic</span>
+</div>
+<!-- Template Card 4 -->
+<div class="min-w-[200px] md:min-w-[240px] snap-center shrink-0 flex flex-col gap-sm">
+<div class="bg-[#FAF5FF] border-2 border-on-background rounded-xl p-2 h-72 sticker-shadow flex flex-col gap-2 relative">
+<div class="absolute -top-3 -right-3 bg-white border-2 border-on-background rounded-full px-2 py-1 font-label-sm text-label-sm sticker-shadow z-10">Pastel</div>
+<div class="flex-1 bg-surface-container border 1px border-outline-variant rounded-md overflow-hidden">
+<img class="w-full h-full object-cover opacity-50" data-alt="A soft lavender background with tiny cute daisy flowers. Light mode, pastel colors, soft edges, high quality." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDIxBuDTC459V7_G7xGzaNaAMpqqb_VdE07tXDb_1uDqKxKKS5N7hftQmpp7oJQ-i3Didkal3YcVmLUrd77nxwoPhfhQLLeb3KSASDnW9_XF5iHyyxXOtbX697ZD9FGXNn5u-HR6N0KeaP9UF4YHsep-HQvk2WqiM7ZhjxiMhb-y5J47F39rDiem-YsnYqTGmezKsWRwxYQMqvKbIuyOBw_PPA5g6bX9HeRCwwFGUByyYWTJY3FN_aP3fssMFnGc4xbRypC1HIzhi9Z"/>
+</div>
+<div class="flex-1 bg-surface-container border 1px border-outline-variant rounded-md overflow-hidden">
+<img class="w-full h-full object-cover opacity-50" data-alt="A soft lavender background with tiny cute daisy flowers. Light mode, pastel colors, soft edges, high quality." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCBak3_GN79JEKga7hf0ZXC786LeX_dxdDvIYBiNyvJYkD8sjLFnAOr1JpooJjITt9oySqhyYBNb7zJIS78aqeMWsEsB6m8mR4J5vCbgtbb9TRlwvmGyDOg1DXrAkRIs3Y8tQNDyIUfFMhcCU7V1sk1deD_JEns9N1iBZEt2mXY7U-svIhutf5-2WlK-e87LOXXKVzP6QuUzoOmBxmcISTVPjxWsZ0d8S533GEKltXQeiUk-P3oMrrLnpb9xEscu_L76ZrxAs9UOQwJ"/>
+</div>
+<div class="flex-1 bg-surface-container border 1px border-outline-variant rounded-md overflow-hidden">
+<img class="w-full h-full object-cover opacity-50" data-alt="A soft lavender background with tiny cute daisy flowers. Light mode, pastel colors, soft edges, high quality." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA13KNMa00HImdgZJXiLHCJhX3TPjADatcYnYpSrdzlaymhDScnZxt1xo_YFA70xI6zNTMMuMpnGXyhd1s0A4zVuDCeqH1AOi7NhnxjwiZPsJihfFHMPPtK84RmuoUw-fIpDEodHI4U0ZyOlaEr49DGy3fk6jHXju3lxFs7UvEzs8Wa3i_McDB-zskhM02WzxCbk8UdwRSW1QeWVK7VtOrA0EPilvWQF3bXPSVwTQcXzFPZJje0jLhIy-NKXISguDH0os6XP2XGPhyw"/>
+</div>
+</div>
+<span class="font-label-bold text-label-bold text-center">Lavender Daisy</span>
+</div>
+<!-- Spacer for scrolling -->
+<div class="min-w-[20px] shrink-0"></div>
+</div>
+<!-- Fade overlays for scroll hints -->
+<div class="absolute top-0 right-0 w-16 h-full bg-gradient-to-l from-surface to-transparent pointer-events-none"></div>
+</section>
+<!-- Premium Teaser -->
+<section class="max-w-[1200px] mx-auto px-margin-mobile md:px-lg">
+<div class="bg-secondary-fixed-dim border-2 border-on-background rounded-2xl p-lg sticker-shadow flex flex-col md:flex-row items-center justify-between gap-lg relative overflow-hidden">
+<!-- Decorative element -->
+<div class="absolute -top-10 -left-10 w-40 h-40 bg-secondary-container rounded-full opacity-50"></div>
+<div class="absolute -bottom-10 -right-10 w-32 h-32 bg-primary-container rounded-full opacity-50"></div>
+<div class="flex-1 z-10 text-center md:text-left">
+<h2 class="font-headline-sm text-headline-sm md:font-headline-md md:text-headline-md text-on-background mb-sm">Unleash your creativity</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-md">
+                        Create your own frames and share them with the community. Join thousands of creators making the cutest photobooth templates.
+                    </p>
+<button class="bg-surface text-on-background border-2 border-on-background px-lg py-sm rounded-xl font-label-bold text-label-bold sticker-shadow sticker-shadow-hover transition-all hover:bg-surface-container-low">
+                        Join Community
+                    </button>
+</div>
+<div class="flex-1 flex justify-center z-10">
+<div class="relative w-48 h-48 bg-white border-2 border-on-background rounded-full sticker-shadow flex items-center justify-center">
+<span class="material-symbols-outlined text-6xl text-secondary" style="font-variation-settings: 'FILL' 1;">palette</span>
+<span class="material-symbols-outlined text-3xl text-primary absolute -top-2 -right-2 bg-white rounded-full border-2 border-on-background p-1 sticker-shadow" style="font-variation-settings: 'FILL' 1;">add_reaction</span>
+<span class="material-symbols-outlined text-3xl text-tertiary absolute -bottom-2 -left-2 bg-white rounded-full border-2 border-on-background p-1 sticker-shadow" style="font-variation-settings: 'FILL' 1;">brush</span>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar (Mobile) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-margin-mobile pb-4 pt-2 bg-white/70 backdrop-blur-xl rounded-t-xl shadow-lg no-border">
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-xl p-2 active:scale-95 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined text-lg mb-1" style="font-variation-settings: 'FILL' 1;">home</span>
+<span class="font-label-sm text-label-sm-mobile">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:bg-surface-container-high active:scale-95 transition-transform duration-150 rounded-xl" href="#">
+<span class="material-symbols-outlined text-lg mb-1">dashboard_customize</span>
+<span class="font-label-sm text-label-sm-mobile">Templates</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:bg-surface-container-high active:scale-95 transition-transform duration-150 rounded-xl" href="#">
+<span class="material-symbols-outlined text-lg mb-1">camera_alt</span>
+<span class="font-label-sm text-label-sm-mobile">Shoot</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:bg-surface-container-high active:scale-95 transition-transform duration-150 rounded-xl" href="#">
+<span class="material-symbols-outlined text-lg mb-1">add_circle</span>
+<span class="font-label-sm text-label-sm-mobile">Create</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:bg-surface-container-high active:scale-95 transition-transform duration-150 rounded-xl" href="#">
+<span class="material-symbols-outlined text-lg mb-1">person</span>
+<span class="font-label-sm text-label-sm-mobile">Profile</span>
+</a>
+</nav>
+<!-- Footer -->
+<footer class="w-full py-md px-margin-desktop flex flex-col md:flex-row justify-between items-center gap-sm bg-surface-container border-t-2 border-on-background pb-24 md:pb-md">
+<div class="font-label-bold text-label-bold text-on-surface">
+            © 2024 Fotbarin
+        </div>
+<div class="flex gap-md">
+<a class="text-on-surface-variant font-body-sm text-body-sm hover:text-primary transition-colors duration-200" href="#">Privacy</a>
+<a class="text-on-surface-variant font-body-sm text-body-sm hover:text-primary transition-colors duration-200" href="#">Terms</a>
+<a class="text-on-surface-variant font-body-sm text-body-sm hover:text-primary transition-colors duration-200" href="#">Contact</a>
+</div>
+</footer>
+</body></html>

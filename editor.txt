@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Fotbarin - Custom Frame Editor</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Quicksand:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface": "#fcf9f8",
+                      "on-primary-fixed": "#2d141c",
+                      "on-background": "#1c1b1b",
+                      "inverse-primary": "#e7bbc6",
+                      "on-secondary-fixed": "#2a1131",
+                      "surface-container": "#f0eded",
+                      "on-primary": "#ffffff",
+                      "outline-variant": "#d3c3c5",
+                      "secondary": "#725477",
+                      "primary-container": "#ffd1dc",
+                      "on-tertiary-container": "#39686d",
+                      "on-secondary-container": "#77587c",
+                      "on-tertiary": "#ffffff",
+                      "tertiary-container": "#b5e5eb",
+                      "on-secondary-fixed-variant": "#593d5f",
+                      "surface-container-lowest": "#ffffff",
+                      "tertiary-fixed": "#bbebf1",
+                      "primary-fixed": "#ffd9e2",
+                      "secondary-container": "#fad3fd",
+                      "primary-fixed-dim": "#e7bbc6",
+                      "surface-tint": "#78555e",
+                      "secondary-fixed": "#fcd7ff",
+                      "surface-container-highest": "#e5e2e1",
+                      "outline": "#817476",
+                      "on-tertiary-fixed": "#001f23",
+                      "on-surface": "#1c1b1b",
+                      "inverse-surface": "#313030",
+                      "on-error": "#ffffff",
+                      "tertiary": "#37656b",
+                      "on-primary-fixed-variant": "#5e3e47",
+                      "on-tertiary-fixed-variant": "#1d4d53",
+                      "secondary-fixed-dim": "#dfbbe4",
+                      "inverse-on-surface": "#f3f0ef",
+                      "surface-container-high": "#eae7e7",
+                      "on-secondary": "#ffffff",
+                      "on-surface-variant": "#4f4446",
+                      "tertiary-fixed-dim": "#9fcfd5",
+                      "background": "#fcf9f8",
+                      "on-primary-container": "#7a5761",
+                      "primary": "#78555e",
+                      "error": "#ba1a1a",
+                      "surface-dim": "#dcd9d9",
+                      "surface-bright": "#fcf9f8",
+                      "on-error-container": "#93000a",
+                      "surface-variant": "#e5e2e1",
+                      "surface-container-low": "#f6f3f2",
+                      "error-container": "#ffdad6"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "base": "4px",
+                      "md": "24px",
+                      "lg": "40px",
+                      "margin-mobile": "20px",
+                      "margin-desktop": "auto",
+                      "xs": "8px",
+                      "gutter": "16px",
+                      "sm": "16px",
+                      "xl": "64px"
+              },
+              "fontFamily": {
+                      "label-bold": [
+                              "Inter"
+                      ],
+                      "body-md": [
+                              "Inter"
+                      ],
+                      "label-sm": [
+                              "Inter"
+                      ],
+                      "display-lg-mobile": [
+                              "Quicksand"
+                      ],
+                      "headline-sm": [
+                              "Quicksand"
+                      ],
+                      "display-lg": [
+                              "Quicksand"
+                      ],
+                      "body-lg": [
+                              "Inter"
+                      ],
+                      "body-sm": [
+                              "Inter"
+                      ],
+                      "headline-md": [
+                              "Quicksand"
+                      ]
+              },
+              "fontSize": {
+                      "label-bold": [
+                              "14px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "label-sm": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "display-lg-mobile": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "headline-sm": [
+                              "20px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "display-lg": [
+                              "48px",
+                              {
+                                      "lineHeight": "56px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "body-sm": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "700"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+    </script>
+<style>
+        /* Custom Scrollbar for Editor Panels */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background-color: #d3c3c5;
+            border-radius: 9999px;
+            border: 2px solid #fcf9f8;
+        }
+        /* Soft Brutalist Button utility class to avoid repetition */
+        .btn-brutalist {
+            border: 2px solid #1c1b1b;
+            box-shadow: 4px 4px 0px 0px #1c1b1b;
+            transition: all 0.15s ease-in-out;
+        }
+        .btn-brutalist:active {
+            transform: translate(4px, 4px);
+            box-shadow: 0px 0px 0px 0px #1c1b1b;
+        }
+    </style>
+</head>
+<body class="bg-surface h-screen overflow-hidden flex flex-col font-body-md text-body-md text-on-background">
+<!-- Global Nav (From JSON) -->
+<div class="w-full bg-surface/70 dark:bg-surface-container/70 backdrop-blur-xl border-b-2 border-on-background dark:border-on-surface-variant shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] relative z-50">
+<nav class="flex justify-between items-center px-margin-desktop h-20 max-w-[1200px] mx-auto w-full">
+<div class="font-display-lg text-display-lg text-primary dark:text-inverse-primary tracking-tight">
+                Fotbarin
+            </div>
+<ul class="hidden md:flex items-center gap-lg">
+<li class="text-primary font-label-bold text-label-bold border-b-2 border-primary pb-1 cursor-pointer">Templates</li>
+<li class="text-on-surface-variant font-body-md hover:text-primary transition-colors cursor-pointer">Community</li>
+<li class="text-on-surface-variant font-body-md hover:text-primary transition-colors cursor-pointer">Pricing</li>
+<li class="text-on-surface-variant font-body-md hover:text-primary transition-colors cursor-pointer">Login</li>
+</ul>
+<button class="bg-primary-container text-on-primary-container font-label-bold text-label-bold px-md py-sm rounded-full border-2 border-on-background shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:bg-primary-fixed active:translate-y-0.5 active:translate-x-0.5 active:shadow-none transition-all hidden md:block">
+                Start Shooting
+            </button>
+</nav>
+</div>
+<!-- Editor Toolbar -->
+<header class="w-full h-[72px] bg-surface-container-low border-b-2 border-on-background flex items-center justify-between px-md shrink-0 z-40">
+<div class="flex items-center gap-sm">
+<button class="p-2 hover:bg-surface-container-highest rounded-full transition-colors flex items-center justify-center">
+<span class="material-symbols-outlined text-on-surface-variant text-[24px]">arrow_back</span>
+</button>
+<div class="flex items-center gap-xs ml-xs">
+<input class="bg-transparent border-none font-headline-sm text-headline-sm text-on-background focus:ring-0 p-0 hover:bg-white rounded px-2 w-[280px] truncate outline-none" type="text" value="My Kawaii Birthday Frame"/>
+<span class="inline-flex items-center gap-1 bg-tertiary-container text-on-tertiary-container font-label-bold text-label-sm px-2 py-1 rounded-full border-2 border-on-background shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
+<span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'FILL' 1;">star</span>
+                    PREMIUM
+                </span>
+</div>
+</div>
+<div class="flex items-center gap-sm">
+<div class="hidden lg:flex items-center gap-xs border-r-2 border-outline-variant pr-sm mr-sm">
+<button class="btn-brutalist bg-white text-on-surface px-sm py-2 rounded-lg font-label-bold text-label-bold flex items-center gap-2 hover:bg-surface-container">
+<span class="material-symbols-outlined text-[18px]">crop_original</span>
+                    Add Photo Slot
+                </button>
+<button class="btn-brutalist bg-white text-on-surface px-sm py-2 rounded-lg font-label-bold text-label-bold flex items-center gap-2 hover:bg-surface-container">
+<span class="material-symbols-outlined text-[18px]">title</span>
+                    Add Text
+                </button>
+<button class="btn-brutalist bg-white text-on-surface px-sm py-2 rounded-lg font-label-bold text-label-bold flex items-center gap-2 hover:bg-surface-container">
+<span class="material-symbols-outlined text-[18px]">mood</span>
+                    Upload Sticker
+                </button>
+</div>
+<button class="font-label-bold text-label-bold text-on-surface-variant hover:text-on-surface px-sm py-2 transition-colors">
+                Save Draft
+            </button>
+<button class="btn-brutalist bg-secondary-container text-on-secondary-container px-md py-2 rounded-lg font-label-bold text-label-bold flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">visibility</span>
+                Preview
+            </button>
+<button class="btn-brutalist bg-primary-container text-on-primary-container px-md py-2 rounded-lg font-label-bold text-label-bold flex items-center gap-2" onclick="document.getElementById('publish-modal').classList.remove('hidden')">
+<span class="material-symbols-outlined text-[18px]">rocket_launch</span>
+                Publish
+            </button>
+</div>
+</header>
+<!-- Main Workspace -->
+<main class="flex-1 flex overflow-hidden bg-surface-variant relative">
+<!-- Left Sidebar (Tools) -->
+<aside class="w-20 lg:w-[280px] bg-white border-r-2 border-on-background flex flex-col shrink-0 h-full overflow-y-auto">
+<!-- Mobile/Compact Tab Icons -->
+<div class="flex flex-col lg:hidden py-sm gap-2 items-center">
+<button class="p-3 bg-primary-container text-on-primary-container rounded-xl border-2 border-on-background shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]"><span class="material-symbols-outlined">dashboard</span></button>
+<button class="p-3 text-on-surface-variant hover:bg-surface-container rounded-xl"><span class="material-symbols-outlined">crop_original</span></button>
+<button class="p-3 text-on-surface-variant hover:bg-surface-container rounded-xl"><span class="material-symbols-outlined">wallpaper</span></button>
+<button class="p-3 text-on-surface-variant hover:bg-surface-container rounded-xl"><span class="material-symbols-outlined">mood</span></button>
+<button class="p-3 text-on-surface-variant hover:bg-surface-container rounded-xl"><span class="material-symbols-outlined">title</span></button>
+<button class="p-3 text-on-surface-variant hover:bg-surface-container rounded-xl"><span class="material-symbols-outlined">layers</span></button>
+</div>
+<!-- Desktop Tabs Panel -->
+<div class="hidden lg:flex flex-col h-full">
+<div class="p-sm grid grid-cols-2 gap-2 border-b-2 border-outline-variant">
+<button class="flex flex-col items-center justify-center p-3 bg-primary-container text-on-primary-container rounded-xl border-2 border-on-background shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-transform">
+<span class="material-symbols-outlined mb-1">dashboard</span>
+<span class="font-label-sm text-label-sm">Layout</span>
+</button>
+<button class="flex flex-col items-center justify-center p-3 bg-white text-on-surface-variant rounded-xl border-2 border-transparent hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined mb-1">crop_original</span>
+<span class="font-label-sm text-label-sm">Photo Slots</span>
+</button>
+<button class="flex flex-col items-center justify-center p-3 bg-white text-on-surface-variant rounded-xl border-2 border-transparent hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined mb-1">wallpaper</span>
+<span class="font-label-sm text-label-sm">Background</span>
+</button>
+<button class="flex flex-col items-center justify-center p-3 bg-white text-on-surface-variant rounded-xl border-2 border-transparent hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined mb-1">mood</span>
+<span class="font-label-sm text-label-sm">Stickers</span>
+</button>
+<button class="flex flex-col items-center justify-center p-3 bg-white text-on-surface-variant rounded-xl border-2 border-transparent hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined mb-1">title</span>
+<span class="font-label-sm text-label-sm">Text</span>
+</button>
+<button class="flex flex-col items-center justify-center p-3 bg-white text-on-surface-variant rounded-xl border-2 border-transparent hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined mb-1">layers</span>
+<span class="font-label-sm text-label-sm">Layers</span>
+</button>
+</div>
+<!-- Active Tab Content (Layout Presets) -->
+<div class="p-sm flex-1 overflow-y-auto">
+<div class="flex items-center justify-between mb-sm">
+<h3 class="font-label-bold text-label-bold text-on-background">Grid Layouts</h3>
+<button class="text-primary hover:underline font-label-sm text-label-sm">See All</button>
+</div>
+<div class="grid grid-cols-2 gap-sm">
+<!-- Preset 1 -->
+<div class="aspect-[2/3] bg-surface border-2 border-on-background rounded-lg p-2 flex flex-col gap-2 cursor-pointer hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-shadow">
+<div class="flex-1 bg-surface-container-high rounded border border-outline-variant"></div>
+<div class="flex-1 bg-surface-container-high rounded border border-outline-variant"></div>
+<div class="flex-1 bg-surface-container-high rounded border border-outline-variant"></div>
+</div>
+<!-- Preset 2 -->
+<div class="aspect-[2/3] bg-surface border-2 border-on-background rounded-lg p-2 flex flex-col gap-2 cursor-pointer hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-shadow">
+<div class="flex-[2] bg-surface-container-high rounded border border-outline-variant"></div>
+<div class="flex flex-1 gap-2">
+<div class="flex-1 bg-surface-container-high rounded border border-outline-variant"></div>
+<div class="flex-1 bg-surface-container-high rounded border border-outline-variant"></div>
+</div>
+</div>
+</div>
+<h3 class="font-label-bold text-label-bold text-on-background mt-md mb-sm">Background Asset</h3>
+<div class="w-full aspect-video bg-surface-container rounded-lg border-2 border-dashed border-outline-variant flex items-center justify-center relative overflow-hidden group cursor-pointer hover:border-primary transition-colors">
+<img class="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:opacity-100 transition-opacity" data-alt="A seamless background texture featuring a subtle, light cream-colored surface with a geometric pattern of tiny, soft lavender polka dots. The style is modern, clean, and slightly playful, reminiscent of high-quality scrapbook paper. The lighting is soft and diffuse, highlighting the gentle pastel tones and creating a calm, inviting backdrop for digital photos." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAJ9nsXnIEgk81WdXOXIAF0U_MLHxNSWamf7SBHPVCQOWF5VqF-LyBzjbRsqUQRFtBcOo4TNvzHpEQpL0N3aO0negiHaQvvWXdsxttXrynX9DEZKB5VPFR5ZjHSb5_vDDYeDlOZOprgypW2abL6yes2ziZOnAHqrYJwugiAXDxUILlOrSEWFKvURUgW8XrhmdMRNZDVUcYFkGHInBBAOYwJFhFWcsE4Anm3_A5A9KiBYL-40CIbcHAQF3lKVrgDiowOF4NfCBvuR_W5"/>
+<div class="relative z-10 flex flex-col items-center pointer-events-none">
+<span class="material-symbols-outlined text-outline group-hover:text-primary">upload</span>
+<span class="font-label-sm text-label-sm text-outline group-hover:text-primary mt-1">Upload Asset</span>
+</div>
+</div>
+</div>
+</div>
+</aside>
+<!-- Central Canvas Area -->
+<section class="flex-1 overflow-auto relative flex items-center justify-center p-lg" style="background-image: radial-gradient(#d3c3c5 1px, transparent 1px); background-size: 20px 20px;">
+<!-- Zoom Controls -->
+<div class="absolute bottom-md left-md bg-white border-2 border-on-background rounded-full shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] flex items-center p-1 z-10">
+<button class="p-2 hover:bg-surface-container rounded-full text-on-surface"><span class="material-symbols-outlined text-[20px]">remove</span></button>
+<span class="font-label-bold text-label-bold w-12 text-center text-on-surface">65%</span>
+<button class="p-2 hover:bg-surface-container rounded-full text-on-surface"><span class="material-symbols-outlined text-[20px]">add</span></button>
+</div>
+<!-- The Frame Canvas -->
+<div class="w-[360px] h-[540px] bg-white border-2 border-on-background shadow-[12px_12px_0px_0px_rgba(0,0,0,0.15)] relative transform transition-transform" style="transform: scale(1);">
+<!-- Frame Inner Background -->
+<div class="absolute inset-0 bg-primary-fixed-dim/20 pointer-events-none"></div>
+<!-- Content Area -->
+<div class="absolute inset-4 flex flex-col gap-3">
+<!-- Selected Photo Slot -->
+<div class="flex-1 bg-surface-container-low border-2 border-dashed border-primary relative group cursor-move">
+<div class="absolute inset-0 flex items-center justify-center text-primary/50 group-hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[32px]">crop_original</span>
+</div>
+<!-- Selection Handles -->
+<div class="absolute -top-1.5 -left-1.5 w-3 h-3 bg-white border-2 border-primary rounded-full"></div>
+<div class="absolute -top-1.5 -right-1.5 w-3 h-3 bg-white border-2 border-primary rounded-full"></div>
+<div class="absolute -bottom-1.5 -left-1.5 w-3 h-3 bg-white border-2 border-primary rounded-full"></div>
+<div class="absolute -bottom-1.5 -right-1.5 w-3 h-3 bg-white border-2 border-primary rounded-full"></div>
+</div>
+<!-- Unselected Photo Slot -->
+<div class="flex-1 bg-surface-container-lowest border-2 border-dashed border-outline-variant relative group cursor-move hover:border-outline">
+<div class="absolute inset-0 flex items-center justify-center text-outline-variant group-hover:text-outline transition-colors">
+<span class="material-symbols-outlined text-[32px]">crop_original</span>
+</div>
+</div>
+<!-- Unselected Photo Slot -->
+<div class="flex-1 bg-surface-container-lowest border-2 border-dashed border-outline-variant relative group cursor-move hover:border-outline">
+<div class="absolute inset-0 flex items-center justify-center text-outline-variant group-hover:text-outline transition-colors">
+<span class="material-symbols-outlined text-[32px]">crop_original</span>
+</div>
+</div>
+</div>
+<!-- Floating Sticker Element -->
+<div class="absolute top-10 -right-6 w-20 h-20 rotate-12 cursor-pointer hover:scale-105 transition-transform z-20">
+<img class="w-full h-full drop-shadow-[2px_4px_0px_rgba(0,0,0,0.15)]" data-alt="A cute, pastel-colored illustration of a digital sticker featuring a smiling, kawaii-style retro camera. The camera has soft rounded edges, a pale pink body, and a teal lens, outlined with a thick, crisp white border and a subtle drop shadow to look like a physical die-cut sticker. The lighting is bright and even, emphasizing the flat vector-style art and playful Gen Z aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAvL1_wMugYW-k2R6ckmdxteCjF0FPoj0TK_XBNEgk2W47xyzqZy5VNIrf7WDBz1MqTF0HkmvTZVIiBtJq00eqWN6KPaTY4iPJ9BnNb1wjnDqaMqI1M_Wi6TsCgZxPQ_B7NniLsxgNNAS4FljG6BEhR_drlXLhtHes2w3YpLj5Yto0QmCQdgLmhIP6AhgPZUUtyOy3YBmE_V3kOhO7R8E2MZ-WU2JrMbFOLIarSjrCCsaROL_ENNfAWv2nrFXQJGaDZQKu7lNIrfv-a"/>
+</div>
+<!-- Text Element -->
+<div class="absolute bottom-6 w-full text-center z-10 pointer-events-none">
+<h2 class="font-display-lg-mobile text-display-lg-mobile text-on-primary-fixed drop-shadow-[2px_2px_0px_#ffffff] tracking-wide">
+                        My 21st! ✨
+                    </h2>
+</div>
+</div>
+</section>
+<!-- Right Sidebar (Properties) -->
+<aside class="w-[320px] bg-white border-l-2 border-on-background flex flex-col shrink-0 h-full overflow-y-auto hidden md:flex">
+<div class="p-md border-b-2 border-outline-variant flex items-center justify-between sticky top-0 bg-white z-10">
+<h2 class="font-headline-sm text-headline-sm text-on-background">Properties</h2>
+<div class="flex gap-2">
+<button class="p-1.5 hover:bg-surface-container rounded text-on-surface-variant"><span class="material-symbols-outlined text-[20px]">content_copy</span></button>
+<button class="p-1.5 hover:bg-error-container hover:text-error rounded text-on-surface-variant transition-colors"><span class="material-symbols-outlined text-[20px]">delete</span></button>
+</div>
+</div>
+<div class="p-md flex flex-col gap-lg">
+<!-- Object Info -->
+<div class="flex items-center gap-sm">
+<div class="w-10 h-10 bg-primary-container rounded flex items-center justify-center border-2 border-on-background">
+<span class="material-symbols-outlined text-primary">crop_original</span>
+</div>
+<div>
+<p class="font-label-bold text-label-bold text-on-background">Photo Slot 1</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Image Container</p>
+</div>
+</div>
+<!-- Transform Grid - Bento Style -->
+<div class="bg-surface-container-low rounded-xl border-2 border-on-background p-sm">
+<h3 class="font-label-bold text-label-bold text-on-surface-variant mb-sm flex items-center justify-between">
+                        Transform
+                        <button class="text-on-surface hover:text-primary"><span class="material-symbols-outlined text-[16px]">lock_open</span></button>
+</h3>
+<div class="grid grid-cols-2 gap-sm">
+<div class="flex flex-col gap-1">
+<label class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">align_horizontal_left</span> X</label>
+<input class="w-full bg-white border-2 border-on-background rounded-md px-2 py-1.5 font-body-sm text-body-sm focus:border-primary focus:ring-0 outline-none transition-colors" type="number" value="16"/>
+</div>
+<div class="flex flex-col gap-1">
+<label class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">align_vertical_top</span> Y</label>
+<input class="w-full bg-white border-2 border-on-background rounded-md px-2 py-1.5 font-body-sm text-body-sm focus:border-primary focus:ring-0 outline-none transition-colors" type="number" value="16"/>
+</div>
+<div class="flex flex-col gap-1">
+<label class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">width</span> W</label>
+<input class="w-full bg-white border-2 border-on-background rounded-md px-2 py-1.5 font-body-sm text-body-sm focus:border-primary focus:ring-0 outline-none transition-colors" type="number" value="328"/>
+</div>
+<div class="flex flex-col gap-1">
+<label class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">height</span> H</label>
+<input class="w-full bg-white border-2 border-on-background rounded-md px-2 py-1.5 font-body-sm text-body-sm focus:border-primary focus:ring-0 outline-none transition-colors" type="number" value="156"/>
+</div>
+</div>
+</div>
+<!-- Appearance -->
+<div class="flex flex-col gap-sm">
+<h3 class="font-label-bold text-label-bold text-on-surface-variant">Appearance</h3>
+<div class="flex items-center justify-between bg-white border-2 border-on-background rounded-lg p-2 px-3">
+<span class="font-body-sm text-body-sm flex items-center gap-2"><span class="material-symbols-outlined text-[18px]">rounded_corner</span> Radius</span>
+<input class="w-16 bg-surface-container border-2 border-transparent focus:border-primary rounded px-2 py-1 font-body-sm text-body-sm outline-none text-center" type="number" value="0"/>
+</div>
+<div class="flex items-center justify-between bg-white border-2 border-on-background rounded-lg p-2 px-3">
+<span class="font-body-sm text-body-sm flex items-center gap-2"><span class="material-symbols-outlined text-[18px]">rotate_right</span> Rotation</span>
+<div class="flex items-center gap-1">
+<input class="w-16 bg-surface-container border-2 border-transparent focus:border-primary rounded px-2 py-1 font-body-sm text-body-sm outline-none text-center" type="number" value="0"/>
+<span class="font-body-sm text-on-surface-variant">°</span>
+</div>
+</div>
+<div class="flex flex-col gap-2 mt-xs">
+<label class="font-label-sm text-label-sm text-on-surface-variant">Fit Mode</label>
+<div class="relative">
+<select class="w-full appearance-none bg-white border-2 border-on-background rounded-lg px-3 py-2 font-body-sm text-body-sm focus:border-primary outline-none">
+<option>Cover (Crop)</option>
+<option>Contain</option>
+<option>Fill</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-on-surface-variant">expand_more</span>
+</div>
+</div>
+</div>
+<!-- Style / Border (Specific to Slot) -->
+<div class="flex flex-col gap-sm">
+<h3 class="font-label-bold text-label-bold text-on-surface-variant flex items-center justify-between">
+                        Slot Border
+                        <div class="w-8 h-4 bg-primary rounded-full relative cursor-pointer shadow-[inset_0px_2px_4px_rgba(0,0,0,0.2)]">
+<div class="absolute right-0.5 top-0.5 w-3 h-3 bg-white rounded-full"></div>
+</div>
+</h3>
+<div class="flex gap-2">
+<button class="flex-1 py-1.5 border-2 border-on-background rounded bg-surface-container-high font-label-sm text-label-sm">Solid</button>
+<button class="flex-1 py-1.5 border-2 border-on-background rounded bg-primary-container text-primary font-label-bold text-label-sm shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">Dashed</button>
+</div>
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-primary border-2 border-on-background shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] cursor-pointer"></div>
+<input class="flex-1 accent-on-background h-2 bg-surface-container rounded-lg appearance-none cursor-pointer" max="10" min="1" type="range" value="2"/>
+<span class="font-body-sm w-4 text-right">2</span>
+</div>
+</div>
+</div>
+</aside>
+</main>
+<!-- Publish Modal Overlay (Hidden by default, shown for prompt requirements) -->
+<div class="fixed inset-0 z-[100] bg-on-background/40 backdrop-blur-sm flex items-center justify-center p-margin-mobile hidden" id="publish-modal">
+<div class="bg-surface w-full max-w-[600px] rounded-xl border-2 border-on-background shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col overflow-hidden animate-[fadeIn_0.2s_ease-out]">
+<div class="px-lg py-md border-b-2 border-on-background flex justify-between items-center bg-white">
+<h2 class="font-headline-md text-headline-md text-on-background">Publish Frame</h2>
+<button class="text-on-surface-variant hover:text-on-background transition-colors p-1 rounded-full hover:bg-surface-container" onclick="document.getElementById('publish-modal').classList.add('hidden')">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<div class="p-lg flex flex-col gap-md overflow-y-auto max-h-[614px]">
+<div class="flex flex-col gap-2">
+<label class="font-label-bold text-label-bold text-on-background">Frame Name</label>
+<input class="w-full bg-white border-2 border-on-background rounded-lg px-3 py-2.5 font-body-md text-body-md focus:border-primary outline-none focus:shadow-[2px_2px_0px_0px_rgba(120,85,94,1)] transition-all" type="text" value="My Kawaii Birthday Frame"/>
+</div>
+<div class="flex flex-col gap-2">
+<label class="font-label-bold text-label-bold text-on-background">Description</label>
+<textarea class="w-full bg-white border-2 border-on-background rounded-lg px-3 py-2.5 font-body-md text-body-md focus:border-primary outline-none focus:shadow-[2px_2px_0px_0px_rgba(120,85,94,1)] transition-all resize-none" placeholder="Tell the community about your frame..." rows="3"></textarea>
+</div>
+<div class="flex flex-col gap-2">
+<label class="font-label-bold text-label-bold text-on-background">Tags (Max 5)</label>
+<div class="flex flex-wrap gap-2 mb-2">
+<span class="inline-flex items-center gap-1 bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full font-label-sm text-label-sm border-2 border-on-background shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
+                            Birthday <button class="hover:text-on-background"><span class="material-symbols-outlined text-[14px]">close</span></button>
+</span>
+<span class="inline-flex items-center gap-1 bg-tertiary-container text-on-tertiary-container px-3 py-1 rounded-full font-label-sm text-label-sm border-2 border-on-background shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
+                            Kawaii <button class="hover:text-on-background"><span class="material-symbols-outlined text-[14px]">close</span></button>
+</span>
+</div>
+<div class="relative">
+<input class="w-full bg-surface-container-lowest border-2 border-outline-variant rounded-lg px-3 py-2.5 font-body-md text-body-md focus:border-primary focus:outline-none" placeholder="Add a tag and press enter" type="text"/>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-outline-variant pointer-events-none">sell</span>
+</div>
+</div>
+<div class="flex flex-col gap-3 mt-xs">
+<label class="font-label-bold text-label-bold text-on-background">Visibility</label>
+<div class="flex gap-4">
+<label class="flex items-center gap-2 cursor-pointer group">
+<div class="w-5 h-5 rounded-full border-2 border-primary flex items-center justify-center">
+<div class="w-2.5 h-2.5 bg-primary rounded-full"></div>
+</div>
+<span class="font-body-md text-on-background group-hover:text-primary transition-colors">Public (Community)</span>
+</label>
+<label class="flex items-center gap-2 cursor-pointer group">
+<div class="w-5 h-5 rounded-full border-2 border-outline-variant flex items-center justify-center"></div>
+<span class="font-body-md text-on-surface-variant group-hover:text-on-background transition-colors">Private (Only Me)</span>
+</label>
+</div>
+</div>
+<div class="mt-xs bg-primary-fixed/30 p-sm rounded-lg border border-primary-fixed-dim flex items-start gap-3">
+<input checked="" class="mt-1 w-5 h-5 rounded border-2 border-on-background text-primary focus:ring-primary focus:ring-offset-0 bg-white cursor-pointer" type="checkbox"/>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-tight">
+                        I confirm that I have the right to use all assets included in this frame and agree to the <a class="text-primary font-label-bold hover:underline" href="#">Community Guidelines</a>.
+                    </p>
+</div>
+</div>
+<div class="px-lg py-md border-t-2 border-on-background bg-surface-container-low flex justify-end gap-sm">
+<button class="px-md py-2.5 font-label-bold text-label-bold text-on-surface-variant hover:text-on-background transition-colors" onclick="document.getElementById('publish-modal').classList.add('hidden')">
+                    Cancel
+                </button>
+<button class="btn-brutalist bg-primary-container text-on-primary-container px-lg py-2.5 rounded-lg font-label-bold text-label-bold flex items-center gap-2 text-[16px]">
+                    Confirm Publish
+                    <span class="material-symbols-outlined">send</span>
+</button>
+</div>
+</div>
+</div>
+<script>
+        // Simple script to demonstrate custom shader tags rendering
+        // In a real environment, the engine replaces these. Here we just ensure they don't break layout.
+        // No inline logic required for the prompt's constraints beyond UI interactions.
+    </script>
+</body></html>

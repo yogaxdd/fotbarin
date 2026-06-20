@@ -1,0 +1,54 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function isSelf(uid) {
+      return signedIn() && request.auth.uid == uid;
+    }
+
+    function publicUserFieldsAreValid() {
+      return request.resource.data.keys().hasOnly([
+        'uid',
+        'name',
+        'username',
+        'bio',
+        'email',
+        'photoURL',
+        'provider',
+        'isPremium',
+        'premiumExpiresAt',
+        'trialUsed',
+        'createdAt',
+        'updatedAt'
+      ]) && request.resource.data.uid == request.auth.uid;
+    }
+
+    match /users/{uid} {
+      allow read: if true;
+      allow create, update: if isSelf(uid) && publicUserFieldsAreValid();
+
+      match /following/{targetUid} {
+        allow read: if isSelf(uid);
+        allow create, update: if isSelf(uid)
+          && targetUid != request.auth.uid
+          && request.resource.data.uid == targetUid
+          && request.resource.data.keys().hasOnly(['uid', 'username', 'name', 'photoURL', 'createdAt']);
+        allow delete: if isSelf(uid);
+      }
+
+      match /followers/{followerUid} {
+        allow read: if isSelf(uid);
+        allow create, update: if signedIn()
+          && followerUid == request.auth.uid
+          && uid != request.auth.uid
+          && request.resource.data.uid == request.auth.uid
+          && request.resource.data.keys().hasOnly(['uid', 'username', 'name', 'photoURL', 'createdAt']);
+        allow delete: if signedIn() && followerUid == request.auth.uid;
+      }
+    }
+  }
+}

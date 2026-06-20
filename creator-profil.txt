@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Creator Profile - Fotbarin</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Quicksand:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind Config Verbatim -->
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+                  "tertiary-fixed-dim": "#9fcfd5",
+                  "on-primary-fixed-variant": "#5e3e47",
+                  "background": "#fcf9f8",
+                  "inverse-surface": "#313030",
+                  "surface-bright": "#fcf9f8",
+                  "surface-tint": "#78555e",
+                  "inverse-on-surface": "#f3f0ef",
+                  "surface-dim": "#dcd9d9",
+                  "on-secondary-fixed-variant": "#593d5f",
+                  "primary-fixed": "#ffd9e2",
+                  "surface-variant": "#e5e2e1",
+                  "on-error-container": "#93000a",
+                  "surface-container-low": "#f6f3f2",
+                  "error": "#ba1a1a",
+                  "surface-container": "#f0eded",
+                  "on-tertiary-container": "#39686d",
+                  "on-tertiary": "#ffffff",
+                  "on-primary-container": "#7a5761",
+                  "tertiary-fixed": "#bbebf1",
+                  "secondary-fixed-dim": "#dfbbe4",
+                  "tertiary": "#37656b",
+                  "on-primary": "#ffffff",
+                  "on-background": "#1c1b1b",
+                  "secondary": "#725477",
+                  "outline": "#817476",
+                  "inverse-primary": "#e7bbc6",
+                  "tertiary-container": "#b5e5eb",
+                  "surface-container-high": "#eae7e7",
+                  "surface": "#fcf9f8",
+                  "primary": "#78555e",
+                  "primary-container": "#ffd1dc",
+                  "outline-variant": "#d3c3c5",
+                  "on-surface-variant": "#4f4446",
+                  "surface-container-highest": "#e5e2e1",
+                  "error-container": "#ffdad6",
+                  "on-primary-fixed": "#2d141c",
+                  "on-error": "#ffffff",
+                  "on-secondary": "#ffffff",
+                  "surface-container-lowest": "#ffffff",
+                  "secondary-fixed": "#fcd7ff",
+                  "primary-fixed-dim": "#e7bbc6",
+                  "on-surface": "#1c1b1b",
+                  "on-secondary-container": "#77587c",
+                  "on-tertiary-fixed-variant": "#1d4d53",
+                  "on-tertiary-fixed": "#001f23",
+                  "on-secondary-fixed": "#2a1131",
+                  "secondary-container": "#fad3fd"
+          },
+          "borderRadius": {
+                  "DEFAULT": "0.25rem",
+                  "lg": "0.5rem",
+                  "xl": "0.75rem",
+                  "full": "9999px"
+          },
+          "spacing": {
+                  "md": "24px",
+                  "margin-desktop": "auto",
+                  "lg": "40px",
+                  "base": "4px",
+                  "sm": "16px",
+                  "xl": "64px",
+                  "gutter": "16px",
+                  "margin-mobile": "20px",
+                  "xs": "8px"
+          },
+          "fontFamily": {
+                  "display-lg": ["Quicksand"],
+                  "body-sm": ["Inter"],
+                  "body-md": ["Inter"],
+                  "label-bold": ["Inter"],
+                  "body-lg": ["Inter"],
+                  "label-sm": ["Inter"],
+                  "headline-sm": ["Quicksand"],
+                  "display-lg-mobile": ["Quicksand"],
+                  "headline-md": ["Quicksand"]
+          },
+          "fontSize": {
+                  "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                  "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                  "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                  "label-bold": ["14px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                  "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                  "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                  "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                  "display-lg-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                  "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    .glass-panel {
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(20px);
+    }
+    
+    .soft-brutalism-card {
+      border: 2px solid #1c1b1b;
+      box-shadow: 4px 4px 0px 0px rgba(0, 0, 0, 1);
+    }
+
+    .soft-brutalism-button {
+      background-color: #ffd1dc; /* primary-container approx */
+      border: 2px solid #1c1b1b;
+      box-shadow: 4px 4px 0px 0px rgba(0, 0, 0, 1);
+      transition: all 0.1s ease;
+    }
+
+    .soft-brutalism-button:active {
+      transform: translate(2px, 2px);
+      box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 1);
+    }
+
+    .sticker-border {
+      border: 3px solid white;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .custom-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-body-md min-h-screen pb-24">
+<!-- Mobile Top Bar (Simplified) -->
+<header class="fixed top-0 left-0 w-full h-16 z-40 px-margin-mobile flex justify-between items-center bg-surface-bright/80 backdrop-blur-md">
+<button class="w-10 h-10 flex items-center justify-center rounded-full bg-white border-2 border-on-background active:scale-90 transition-transform">
+<span class="material-symbols-outlined" data-icon="arrow_back">arrow_back</span>
+</button>
+<h1 class="font-headline-sm text-headline-sm text-primary">Creator</h1>
+<button class="w-10 h-10 flex items-center justify-center rounded-full bg-white border-2 border-on-background active:scale-90 transition-transform">
+<span class="material-symbols-outlined" data-icon="more_horiz">more_horiz</span>
+</button>
+</header>
+<main class="pt-16 max-w-md mx-auto">
+<!-- Profile Banner -->
+<section class="relative h-48 w-full">
+<div class="w-full h-full bg-cover bg-center" data-alt="A whimsical digital collage banner for a creative creator profile. The style is soft brutalism with playful pastel blobs in lavender, soft pink, and mint green. High-quality textures and abstract aesthetic elements create a Kawaii-modern atmosphere, perfectly matching the Gen Z-centric digital photobooth branding of Fotbarin. Soft, diffused lighting enhances the depth and charm." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDeXsaF5jIIgBKzOKlbSxnVpOihqQ5c7oBh0WZCUKF67TRQkcVTq9WZjFRSbxTEXhnMwF_df2uVwLEWI3m9qs3Asbdw2jlyGSwFCfmK2AoWRIqqlPbapCrs0S9QmqAKD2JEA1OI641ZVOjSp_Fr-VMmBcbyOryBDW5s-mAbyg0vFbIBuRygHTBaFAI-n-gq6NbYfyA9pO2qDGIQEcuBgOBQz-noFRJKqHB07BX6T-GT0X8xos1hR2uSvi867SvELzCoBtaRyaE6mAFW')">
+</div>
+<!-- Avatar -->
+<div class="absolute -bottom-10 left-margin-mobile">
+<div class="w-24 h-24 rounded-full sticker-border overflow-hidden bg-white">
+<img class="w-full h-full object-cover" data-alt="A close-up portrait of a stylish Gen Z creator named Yuki, wearing colorful vintage-style glasses and a pastel-toned sweater. The lighting is bright and cheerful, set against a clean white studio background. The overall aesthetic is charming and modern, representing the 'YukiCreates' identity in a high-quality, friendly manner." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAxdFXu5-ks6r75kWPKTNBxrP1682pqTV7ezoWWiFOeeabwJlf_RtmZ9jcZ_haH0-NTgB51BRYESZe8dLPng7xMqmdf54Xh4wy8LMdBiRbeF7IIlaTAGqyBGfryBz9KbstHjyJDrwVmAvZ2cozML-k6KTpZQndkbEciVKfXss8b52i0-hyvhuyum1u302t4He6BF7PoWXtb2gllq7BDnuqOEM5NF83kMmW8e7TbHVzsSEU02LUXWR1cnqKPu2-Hj62aYVis0UbUDk-g"/>
+</div>
+</div>
+</section>
+<!-- Profile Info -->
+<section class="mt-12 px-margin-mobile">
+<div class="flex justify-between items-start">
+<div>
+<h2 class="font-headline-md text-headline-md text-on-surface">@YukiCreates</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant max-w-[240px]">Creating cute frames for your digital memories. 📸✨ Lover of all things pastel and retro photobooths.</p>
+</div>
+<button class="soft-brutalism-button px-6 py-2 rounded-xl font-label-bold text-label-bold text-on-primary-container">
+          Follow
+        </button>
+</div>
+<!-- Stats -->
+<div class="mt-md flex gap-sm overflow-x-auto custom-scrollbar">
+<div class="flex flex-col items-center justify-center min-w-[80px] p-sm bg-white rounded-xl border-2 border-outline-variant">
+<span class="font-label-bold text-label-bold text-primary">12.4k</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Likes</span>
+</div>
+<div class="flex flex-col items-center justify-center min-w-[80px] p-sm bg-white rounded-xl border-2 border-outline-variant">
+<span class="font-label-bold text-label-bold text-primary">8.2k</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Uses</span>
+</div>
+<div class="flex flex-col items-center justify-center min-w-[80px] p-sm bg-white rounded-xl border-2 border-outline-variant">
+<span class="font-label-bold text-label-bold text-primary">42</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Frames</span>
+</div>
+</div>
+</section>
+<!-- Content Grid -->
+<section class="mt-lg px-margin-mobile">
+<div class="flex items-center justify-between mb-sm">
+<h3 class="font-headline-sm text-headline-sm">Published Frames</h3>
+<button class="flex items-center gap-1 text-primary font-label-bold text-label-bold">
+<span class="material-symbols-outlined text-[18px]" data-icon="filter_list">filter_list</span>
+          Latest
+        </button>
+</div>
+<!-- Frames Grid -->
+<div class="grid grid-cols-2 gap-gutter">
+<!-- Card 1 -->
+<div class="soft-brutalism-card bg-white rounded-xl overflow-hidden group">
+<div class="aspect-[3/4] relative">
+<img class="w-full h-full object-cover" data-alt="A digital photobooth frame design titled 'Pastel Dream'. The design features soft pink and lavender borders with cute sticker-like illustrations of clouds and sparkles. The layout is optimized for a four-shot vertical photobooth strip. The aesthetic is clean, Kawaii-modern, and highly tactile, perfect for social sharing." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDczkKjQ1V2ZuxcxivEmzIfhHx5C_1xBI4WVr-2UFNvUPDy2tbj9060C_OOjUfmcGuFxAVuDbCEMXm1P1iQusxWA2nxx8a2ni4trxgzyNYSwChwDLFNmG6ZPJxDcZiC8wqm1Da1CtZL1JtBFTU780h_iN_d9YTAZHqDO0hNc1x4emMv8pe3IQoTwOAnOv8DRH9vL5H8w4Th9knfLVMYaAz4Fpc_ls3k1UsqAvquWR2sGMhEJlv4iFEJHGAcGBoIv_qOaEvh-1Ywhtl5"/>
+<div class="absolute top-2 right-2 p-1 bg-white/90 rounded-full flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-[16px] text-primary" data-icon="favorite" style="font-variation-settings: 'FILL' 1;">favorite</span>
+</div>
+</div>
+<div class="p-xs">
+<p class="font-label-bold text-label-bold text-on-surface truncate">Pastel Dream</p>
+<div class="flex items-center justify-between mt-1">
+<span class="font-label-sm text-label-sm text-on-surface-variant">1.2k used</span>
+<span class="material-symbols-outlined text-[18px] text-primary" data-icon="add_circle">add_circle</span>
+</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="soft-brutalism-card bg-white rounded-xl overflow-hidden group">
+<div class="aspect-[3/4] relative">
+<img class="w-full h-full object-cover" data-alt="A retro-style digital photobooth frame named 'Neon Arcade'. It features high-contrast black borders with bright neon blue and pink geometric shapes and 8-bit sticker elements. The design feels nostalgic yet energetic, designed for dynamic nightlife-themed photos. Crisp lines and bold colors define the Soft Brutalism style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAeBaikx6QLhDZY1SiXEJkoQ1xQsQ9V0CjCDW9xD95a8SeNwMD70M4MIvYi5bR-i7w4WWCU5500XIy8jBF8yIlsYphnHWBh4UwSPAxu7Qb7h8lzMVO7eVg5q5eDes1Fl4jaYNWrP-Sy4x0yZ1TtNY2ntY97mXIi8KNwnMiEygs193R_bwGkWR2cV3kXa-fFuqzX-a46YbFUj2z_QZRsEcGkzSXG9Ohq9sK8G98Lg084iGUkeKAU5pzo95-fyVRF_l95FesZfwHqIR8i"/>
+<div class="absolute top-2 right-2 p-1 bg-white/90 rounded-full flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-[16px] text-primary" data-icon="favorite" style="font-variation-settings: 'FILL' 0;">favorite</span>
+</div>
+</div>
+<div class="p-xs">
+<p class="font-label-bold text-label-bold text-on-surface truncate">Neon Arcade</p>
+<div class="flex items-center justify-between mt-1">
+<span class="font-label-sm text-label-sm text-on-surface-variant">840 used</span>
+<span class="material-symbols-outlined text-[18px] text-primary" data-icon="add_circle">add_circle</span>
+</div>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="soft-brutalism-card bg-white rounded-xl overflow-hidden group">
+<div class="aspect-[3/4] relative">
+<img class="w-full h-full object-cover" data-alt="A minimalist 'Y2K Sparkle' digital photobooth frame. The design uses a frosted glass effect with holographic butterfly stickers and subtle silver glitter accents. It creates a dreamy, nostalgic atmosphere consistent with early 2000s internet aesthetics. The lighting is high-key and optimistic, appealing to a Gen Z audience." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAtkt7GFR7I_u_kssmcs8UdfID9pwj1GlAiQ3_deAH16vTCwIY5tmDNRwLejEGV_T3VLhX9OzNp-K31OSw0EnC045olhu0zss6jyDkm5_0TVdkNO3vXKu2hbODL770xYTooqXDTW0GUuMk8Nkxh1HoOfZkyulMnSBQbPYRfsajEzxeYwL1VISLkpHC3aM5RMT6ZuX_jnvZq_gswZbOqoeQgSveyOQ4NQIzUChnsgz1JCpAkOJ4rg4sXKh5Hy53Oihz_BjWuYNUQ2uz-"/>
+<div class="absolute top-2 right-2 p-1 bg-white/90 rounded-full flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-[16px] text-primary" data-icon="favorite" style="font-variation-settings: 'FILL' 1;">favorite</span>
+</div>
+</div>
+<div class="p-xs">
+<p class="font-label-bold text-label-bold text-on-surface truncate">Y2K Sparkle</p>
+<div class="flex items-center justify-between mt-1">
+<span class="font-label-sm text-label-sm text-on-surface-variant">3.4k used</span>
+<span class="material-symbols-outlined text-[18px] text-primary" data-icon="add_circle">add_circle</span>
+</div>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="soft-brutalism-card bg-white rounded-xl overflow-hidden group">
+<div class="aspect-[3/4] relative">
+<img class="w-full h-full object-cover" data-alt="A sophisticated 'Coffee Shop' digital photobooth frame with warm brown tones, cream accents, and hand-drawn doodle stickers of coffee cups and croissants. The style is cozy and inviting, featuring a paper-like texture and soft, natural color grading. It embodies a serene, lifestyle-focused creative direction." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDYRs_S1KiI50gKnxgQCwb0ES19ECoClcj9azsA2QmBuUsZZaXInx8_OHmd5-uSOOBsAEbbitrbOr5ZCcdFzdjIF1S_TEyUBwSrlEQo7oGxWL7xnvkLEVz1K-6PqiKCfXUk2wpiX2nDs-vwPiKVqpt3RQmhYFtnWl4U8jNBAg4xxtf2jspjTEiKoEKmqaakKK7z-4vb6FSu9vnR6g0yu89vhEV-5CjsAUParCrcwvs4iLfXW_lhEqegAvzv008QThrA2wAZfHBIOL9W"/>
+<div class="absolute top-2 right-2 p-1 bg-white/90 rounded-full flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-[16px] text-primary" data-icon="favorite" style="font-variation-settings: 'FILL' 0;">favorite</span>
+</div>
+</div>
+<div class="p-xs">
+<p class="font-label-bold text-label-bold text-on-surface truncate">Coffee Morning</p>
+<div class="flex items-center justify-between mt-1">
+<span class="font-label-sm text-label-sm text-on-surface-variant">610 used</span>
+<span class="material-symbols-outlined text-[18px] text-primary" data-icon="add_circle">add_circle</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Bottom Navigation Bar (Contextually Active on Profile) -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-margin-mobile pb-4 pt-2 bg-white/70 dark:bg-surface-container-highest/70 backdrop-blur-xl shadow-lg rounded-t-xl">
+<div class="flex flex-col items-center justify-center text-on-surface-variant p-2 active:scale-95 transition-transform duration-150">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-label-sm text-label-sm-mobile">Home</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant p-2 active:scale-95 transition-transform duration-150">
+<span class="material-symbols-outlined" data-icon="dashboard_customize">dashboard_customize</span>
+<span class="font-label-sm text-label-sm-mobile">Templates</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant p-2 active:scale-95 transition-transform duration-150">
+<span class="material-symbols-outlined" data-icon="camera_alt">camera_alt</span>
+<span class="font-label-sm text-label-sm-mobile">Shoot</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant p-2 active:scale-95 transition-transform duration-150">
+<span class="material-symbols-outlined" data-icon="add_circle">add_circle</span>
+<span class="font-label-sm text-label-sm-mobile">Create</span>
+</div>
+<div class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-xl p-2 active:scale-95 transition-transform duration-150">
+<span class="material-symbols-outlined" data-icon="person" style="font-variation-settings: 'FILL' 1;">person</span>
+<span class="font-label-sm text-label-sm-mobile">Profile</span>
+</div>
+</nav>
+<script>
+    // Micro-interaction for Follow Button
+    const followBtn = document.querySelector('.soft-brutalism-button');
+    let following = false;
+    followBtn.addEventListener('click', () => {
+      following = !following;
+      followBtn.textContent = following ? 'Following' : 'Follow';
+      followBtn.style.backgroundColor = following ? '#e5e2e1' : '#ffd1dc';
+      followBtn.style.color = following ? '#4f4446' : '#7a5761';
+    });
+
+    // Micro-interaction for Like toggles
+    const favoriteIcons = document.querySelectorAll('[data-icon="favorite"]');
+    favoriteIcons.forEach(icon => {
+      icon.parentElement.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const currentFill = icon.style.fontVariationSettings.includes("'FILL' 1");
+        icon.style.fontVariationSettings = `'FILL' ${currentFill ? 0 : 1}`;
+        icon.classList.toggle('text-primary');
+        icon.classList.toggle('text-on-surface-variant');
+      });
+    });
+  </script>
+</body></html>

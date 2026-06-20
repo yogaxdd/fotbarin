@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Fotbarin | Explore Templates</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&amp;family=Inter:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .dotted-bg {
+            background-image: radial-gradient(circle, #d3c3c5 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        .sticker-border {
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+        }
+        /* Custom scrollbar hiding */
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "tertiary-fixed-dim": "#9fcfd5",
+                      "on-primary-fixed-variant": "#5e3e47",
+                      "background": "#fcf9f8",
+                      "inverse-surface": "#313030",
+                      "surface-bright": "#fcf9f8",
+                      "surface-tint": "#78555e",
+                      "inverse-on-surface": "#f3f0ef",
+                      "surface-dim": "#dcd9d9",
+                      "on-secondary-fixed-variant": "#593d5f",
+                      "primary-fixed": "#ffd9e2",
+                      "surface-variant": "#e5e2e1",
+                      "on-error-container": "#93000a",
+                      "surface-container-low": "#f6f3f2",
+                      "error": "#ba1a1a",
+                      "surface-container": "#f0eded",
+                      "on-tertiary-container": "#39686d",
+                      "on-tertiary": "#ffffff",
+                      "on-primary-container": "#7a5761",
+                      "tertiary-fixed": "#bbebf1",
+                      "secondary-fixed-dim": "#dfbbe4",
+                      "tertiary": "#37656b",
+                      "on-primary": "#ffffff",
+                      "on-background": "#1c1b1b",
+                      "secondary": "#725477",
+                      "outline": "#817476",
+                      "inverse-primary": "#e7bbc6",
+                      "tertiary-container": "#b5e5eb",
+                      "surface-container-high": "#eae7e7",
+                      "surface": "#fcf9f8",
+                      "primary": "#78555e",
+                      "primary-container": "#ffd1dc",
+                      "outline-variant": "#d3c3c5",
+                      "on-surface-variant": "#4f4446",
+                      "surface-container-highest": "#e5e2e1",
+                      "error-container": "#ffdad6",
+                      "on-primary-fixed": "#2d141c",
+                      "on-error": "#ffffff",
+                      "on-secondary": "#ffffff",
+                      "surface-container-lowest": "#ffffff",
+                      "secondary-fixed": "#fcd7ff",
+                      "primary-fixed-dim": "#e7bbc6",
+                      "on-surface": "#1c1b1b",
+                      "on-secondary-container": "#77587c",
+                      "on-tertiary-fixed-variant": "#1d4d53",
+                      "on-tertiary-fixed": "#001f23",
+                      "on-secondary-fixed": "#2a1131",
+                      "secondary-container": "#fad3fd"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "md": "24px",
+                      "margin-desktop": "auto",
+                      "lg": "40px",
+                      "base": "4px",
+                      "sm": "16px",
+                      "xl": "64px",
+                      "gutter": "16px",
+                      "margin-mobile": "20px",
+                      "xs": "8px"
+              },
+              "fontFamily": {
+                      "display-lg": ["Quicksand"],
+                      "body-sm": ["Inter"],
+                      "body-md": ["Inter"],
+                      "label-bold": ["Inter"],
+                      "body-lg": ["Inter"],
+                      "label-sm": ["Inter"],
+                      "headline-sm": ["Quicksand"],
+                      "display-lg-mobile": ["Quicksand"],
+                      "headline-md": ["Quicksand"]
+              },
+              "fontSize": {
+                      "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                      "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "label-bold": ["14px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                      "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                      "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                      "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                      "display-lg-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                      "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-body-md min-h-screen dotted-bg">
+<!-- Top AppBar - Following JSON Structure -->
+<header class="fixed top-0 w-full z-50 flex justify-between items-center px-margin-mobile h-16 bg-surface/70 backdrop-blur-xl border-b-2 border-on-background">
+<h1 class="font-display-lg-mobile text-display-lg-mobile text-primary">Fotbarin</h1>
+<div class="flex gap-xs">
+<button class="p-2 bg-white border-2 border-on-background shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] active:translate-y-0.5 active:shadow-none transition-all rounded-lg">
+<span class="material-symbols-outlined text-primary">notifications</span>
+</button>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="pt-20 pb-32 px-margin-mobile">
+<!-- Search & Discovery Section -->
+<section class="mb-sm">
+<div class="relative mb-md">
+<input class="w-full h-14 pl-12 pr-4 rounded-xl border-2 border-on-background shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] focus:outline-none focus:ring-0 focus:border-primary font-body-md bg-white" placeholder="Search templates..." type="text"/>
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+</div>
+<!-- Filter Chips - Horizontal Scroll -->
+<div class="flex gap-xs overflow-x-auto hide-scrollbar pb-2">
+<button class="flex-none px-4 py-2 bg-primary-container text-on-primary-container border-2 border-on-background shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] rounded-full font-label-bold">All</button>
+<button class="flex-none px-4 py-2 bg-white border-2 border-on-background shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] rounded-full font-label-bold hover:bg-surface-container-high transition-colors">4-Cut</button>
+<button class="flex-none px-4 py-2 bg-white border-2 border-on-background shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] rounded-full font-label-bold hover:bg-surface-container-high transition-colors">Couple</button>
+<button class="flex-none px-4 py-2 bg-white border-2 border-on-background shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] rounded-full font-label-bold hover:bg-surface-container-high transition-colors">Bestie</button>
+<button class="flex-none px-4 py-2 bg-white border-2 border-on-background shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] rounded-full font-label-bold hover:bg-surface-container-high transition-colors">Kawaii</button>
+<button class="flex-none px-4 py-2 bg-white border-2 border-on-background shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] rounded-full font-label-bold hover:bg-surface-container-high transition-colors">Y2K</button>
+</div>
+</section>
+<!-- Template Grid - 2 Column -->
+<section class="grid grid-cols-2 gap-gutter">
+<!-- Template Card 1 -->
+<div class="bg-white rounded-xl border-2 border-on-background shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] overflow-hidden flex flex-col group active:scale-[0.98] transition-transform">
+<div class="aspect-[3/4] relative overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover" data-alt="A vertical digital photobooth strip with four frames showing a joyful young woman in a stylish pink outfit posing in a soft pastel studio. The frames are decorated with cute digital stickers of cherry blossoms and sparkling stars. The aesthetic is bright, high-key, and playful with a Kawaii-modern influence." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCiZf-nODWKK6aHmiFWrRo10qA29DbU-5PhKFGzFL1pKDwipCDp2KrylJ0laztZhzc4yMG5LkgII4ECDzxhlQvPswUz1HeUtEmpoIKx2gJLr_-G7h03l_gPeJKx9rPQa2-U-rSV-P8NNguv5dyFEGWUwYR06K_cc3LyI4iCeQnvfPN2N4vNm6bBLI1PKL4B_ZjB9lk6-cmk3fRFBiuFyMHtdQhBHLiUsdCjLch_F0D7Luj1jxXNqz8awgWEFhsF8eY9PQRsetqERa4Z"/>
+<div class="absolute top-2 left-2 px-2 py-1 bg-secondary-container text-on-secondary-container border-2 border-on-background text-[10px] font-label-bold rounded-lg shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">4-CUT</div>
+</div>
+<div class="p-3 flex flex-col gap-1">
+<h3 class="font-label-bold text-on-surface truncate">Cherry Blossom</h3>
+<p class="font-body-sm text-on-surface-variant text-xs truncate">@momo_chan</p>
+<button class="mt-2 w-full py-2 bg-primary-container text-on-primary-container border-2 border-on-background shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] active:translate-y-0.5 active:shadow-none transition-all rounded-lg font-label-bold text-xs">Use Template</button>
+</div>
+</div>
+<!-- Template Card 2 -->
+<div class="bg-white rounded-xl border-2 border-on-background shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] overflow-hidden flex flex-col group active:scale-[0.98] transition-transform">
+<div class="aspect-[3/4] relative overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover" data-alt="A high-energy digital template featuring neon Y2K graphic elements like butterflies and pixelated fonts. The center displays a wide single frame showing two best friends laughing, styled with a grainy film filter and high contrast lighting. Vibrant purples and blues dominate the palette in a playful scrapbook style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCWjZandTgJAAD3MkOMeHpA1SYI3jswBxBl1laU_Kq4bdN_RCuBgzlSKx9KTMHybMGBoIui4tDkaZvqJuSxS0o_trWDfL16iG8DBXj_HycfQMcGfdL3b_aHRcJpF8N-yE0EiN0OR5T7gfe5CJt_EXfptBOOFjEktJLOJW5wg6_wCVhYtv-GY2oBIEPQDF1wnuKjhvGM5lQrbtwsb2XZPV2QsNcZnxnusoAoJIyS17m3gi1-HqhNgFjXDTl6hXLWNJCG9-XED6NVVmC2"/>
+<div class="absolute top-2 left-2 px-2 py-1 bg-tertiary-container text-on-tertiary-container border-2 border-on-background text-[10px] font-label-bold rounded-lg shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">BESTIE</div>
+</div>
+<div class="p-3 flex flex-col gap-1">
+<h3 class="font-label-bold text-on-surface truncate">Cyber Retro</h3>
+<p class="font-body-sm text-on-surface-variant text-xs truncate">@neon_vibe</p>
+<button class="mt-2 w-full py-2 bg-primary-container text-on-primary-container border-2 border-on-background shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] active:translate-y-0.5 active:shadow-none transition-all rounded-lg font-label-bold text-xs">Use Template</button>
+</div>
+</div>
+<!-- Template Card 3 -->
+<div class="bg-white rounded-xl border-2 border-on-background shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] overflow-hidden flex flex-col group active:scale-[0.98] transition-transform">
+<div class="aspect-[3/4] relative overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover" data-alt="A minimalist and elegant photo template with a soft cream background and fine black line borders. The layout features two square frames containing artistic close-up shots of a couple. Tiny heart stickers are placed subtly at the corners. The lighting is warm and natural, creating a romantic and serene atmosphere." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBrAVEnXBqUYF2JMKL2gKv2xzNt38xQGC58BsETV_uTDsy4tRFmsxuXrBT8rF29MkOlOInbh8OorZfeyd4vz809h-geelCI7QO2y5aPhUNtUbR6liLAMOF6fFb-GoN-lPC68diRYhccr0ihV2pOREuzjH1yjclLL8wYLvNnC7HAanwX4MTndzxkM-nVMMgS1rMjqsLWPW7-x6335S0-k9IDwYfemSRG_5LTqf80EI05GUE3JH9EuFom85eHlm13V0655ukWQjN10lSr"/>
+<div class="absolute top-2 left-2 px-2 py-1 bg-secondary-container text-on-secondary-container border-2 border-on-background text-[10px] font-label-bold rounded-lg shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">COUPLE</div>
+</div>
+<div class="p-3 flex flex-col gap-1">
+<h3 class="font-label-bold text-on-surface truncate">Minimal Love</h3>
+<p class="font-body-sm text-on-surface-variant text-xs truncate">@aesthetic_snaps</p>
+<button class="mt-2 w-full py-2 bg-primary-container text-on-primary-container border-2 border-on-background shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] active:translate-y-0.5 active:shadow-none transition-all rounded-lg font-label-bold text-xs">Use Template</button>
+</div>
+</div>
+<!-- Template Card 4 -->
+<div class="bg-white rounded-xl border-2 border-on-background shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] overflow-hidden flex flex-col group active:scale-[0.98] transition-transform">
+<div class="aspect-[3/4] relative overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover" data-alt="A playful and colorful digital frame decorated with hand-drawn doodles of kittens, clouds, and rainbow arcs. The three vertical frames show a person holding a cat. The color palette is composed of soft lavenders, light blues, and mint greens. The overall vibe is highly inviting, cute, and full of soft brutalism charm." src="https://lh3.googleusercontent.com/aida-public/AB6AXuACkOw8ELNgVJ6YDwTsZgP3FC3TWF_nb-BNQlTF9j9rZkDPdElzJkXDD0-udRo5VF61eA7OoJ3fEMXhVGlus5yMZoWaJVMyI1FFI6b0tjruw-19SjSZiBFaCO9LNcQ5wtf319B8ARVVAdIvBUrDKckL_lZmSj3W8bSQpI5bN7t9UGjWCpMaOBBfb-Ysvn1vMM19cqUCgOmAiUJfHHLZrZPIes1xK5-18Agzoc8jfc-6rIy0gCpK9AQKUP0lb_6ZHwNPcg0_w_x5pPEe"/>
+<div class="absolute top-2 left-2 px-2 py-1 bg-tertiary-container text-on-tertiary-container border-2 border-on-background text-[10px] font-label-bold rounded-lg shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">KAWAII</div>
+</div>
+<div class="p-3 flex flex-col gap-1">
+<h3 class="font-label-bold text-on-surface truncate">Meow Day</h3>
+<p class="font-body-sm text-on-surface-variant text-xs truncate">@doodle_bug</p>
+<button class="mt-2 w-full py-2 bg-primary-container text-on-primary-container border-2 border-on-background shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] active:translate-y-0.5 active:shadow-none transition-all rounded-lg font-label-bold text-xs">Use Template</button>
+</div>
+</div>
+<!-- Template Card 5 -->
+<div class="bg-white rounded-xl border-2 border-on-background shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] overflow-hidden flex flex-col group active:scale-[0.98] transition-transform">
+<div class="aspect-[3/4] relative overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover" data-alt="A vintage-inspired photobooth strip with a sepia-toned finish and burnt edges. The frames show grainy, candid shots of a sunset over a city skyline. The template is adorned with retro typography and small camera icons. The lighting is nostalgic and dramatic, evoking a sense of travel and memory." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDzusvqZ_NiEl_dd9DCn3ACj_XDabjNMB8TaDGLCvZFg_JpPQA8gHJ_zSzkgQCZWpt2d67bKzBh5sNmwJTC61OKJKF6jqjVqyLbvjuKMwuUkeaIRARb33pnMO4IPY4b7EkR0Z_ILAkLW4nAyCwe-jI5jWfVIKLAQzqNxMzXU5S6WGwR2z2KRIzyc2mCq0PBWD3EN6mh4NNas1V0HetjmZl6NN8hbrM1Aqa3YfZPYrMM4x3_LZC8lgMcyhpiILEuvaDtm2jO6Gi1U4JV"/>
+<div class="absolute top-2 left-2 px-2 py-1 bg-secondary-container text-on-secondary-container border-2 border-on-background text-[10px] font-label-bold rounded-lg shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">FILM</div>
+</div>
+<div class="p-3 flex flex-col gap-1">
+<h3 class="font-label-bold text-on-surface truncate">Retro Soul</h3>
+<p class="font-body-sm text-on-surface-variant text-xs truncate">@vintage_curator</p>
+<button class="mt-2 w-full py-2 bg-primary-container text-on-primary-container border-2 border-on-background shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] active:translate-y-0.5 active:shadow-none transition-all rounded-lg font-label-bold text-xs">Use Template</button>
+</div>
+</div>
+<!-- Template Card 6 -->
+<div class="bg-white rounded-xl border-2 border-on-background shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] overflow-hidden flex flex-col group active:scale-[0.98] transition-transform">
+<div class="aspect-[3/4] relative overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover" data-alt="A futuristic template with holographic textures and metallic borders. The layout is asymmetrical with various sized frames featuring street fashion photography. Glitch art effects and digital noise patterns are used as decorative elements. The mood is edgy, urban, and high-fashion with a vibrant cool-toned color scheme." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBShyeTBJlQ1qOBnrhCv5okE-ViEh5m93YcpcuGWMj6v4Omj8nSu2edyeR4yyPRwotMdmwY9cdOR3iAGVYGz7Xy8h7yT2EWtRie2LmZEOmuE11ECX1Z31CA04B8q3SnQRCUb4Q3J3fkdKBr94bZpHHZ_asLc1Q8a9iIG1pvOtj7iBCHNkIbW4jCB_CswHV8C8Wj4VG6BdLJlN_ezzsUf2_9pAQDN6gEzzW0fXE_iK0cYoICjWPVkY4fMMd_POYw2py44xKwAlbe-pET"/>
+<div class="absolute top-2 left-2 px-2 py-1 bg-tertiary-container text-on-tertiary-container border-2 border-on-background text-[10px] font-label-bold rounded-lg shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">URBAN</div>
+</div>
+<div class="p-3 flex flex-col gap-1">
+<h3 class="font-label-bold text-on-surface truncate">Holo Cyber</h3>
+<p class="font-body-sm text-on-surface-variant text-xs truncate">@pixel_wear</p>
+<button class="mt-2 w-full py-2 bg-primary-container text-on-primary-container border-2 border-on-background shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] active:translate-y-0.5 active:shadow-none transition-all rounded-lg font-label-bold text-xs">Use Template</button>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar - Mapping from JSON -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-margin-mobile pb-4 pt-2 bg-white/70 backdrop-blur-xl rounded-t-xl shadow-lg">
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:bg-surface-container-high active:scale-95 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="font-label-sm text-label-sm-mobile">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-xl p-2 active:scale-95 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">dashboard_customize</span>
+<span class="font-label-sm text-label-sm-mobile">Templates</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:bg-surface-container-high active:scale-95 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined">camera_alt</span>
+<span class="font-label-sm text-label-sm-mobile">Shoot</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:bg-surface-container-high active:scale-95 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined">add_circle</span>
+<span class="font-label-sm text-label-sm-mobile">Create</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:bg-surface-container-high active:scale-95 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-sm text-label-sm-mobile">Profile</span>
+</a>
+</nav>
+<script>
+        // Simple Interaction Handler
+        document.querySelectorAll('button').forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Future logic for interactions
+                console.log('Action triggered');
+            });
+        });
+
+        // Filter Logic Placeholder
+        const filters = document.querySelectorAll('.flex-none');
+        filters.forEach(filter => {
+            filter.addEventListener('click', () => {
+                filters.forEach(f => {
+                    f.classList.remove('bg-primary-container', 'text-on-primary-container');
+                    f.classList.add('bg-white');
+                });
+                filter.classList.remove('bg-white');
+                filter.classList.add('bg-primary-container', 'text-on-primary-container');
+            });
+        });
+    </script>
+</body></html>

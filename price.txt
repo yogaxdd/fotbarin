@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Pricing - Fotbarin</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Quicksand:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Config injected from Style Guidance -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface": "#fcf9f8",
+                    "on-primary-fixed": "#2d141c",
+                    "on-background": "#1c1b1b",
+                    "inverse-primary": "#e7bbc6",
+                    "on-secondary-fixed": "#2a1131",
+                    "surface-container": "#f0eded",
+                    "on-primary": "#ffffff",
+                    "outline-variant": "#d3c3c5",
+                    "secondary": "#725477",
+                    "primary-container": "#ffd1dc",
+                    "on-tertiary-container": "#39686d",
+                    "on-secondary-container": "#77587c",
+                    "on-tertiary": "#ffffff",
+                    "tertiary-container": "#b5e5eb",
+                    "on-secondary-fixed-variant": "#593d5f",
+                    "surface-container-lowest": "#ffffff",
+                    "tertiary-fixed": "#bbebf1",
+                    "primary-fixed": "#ffd9e2",
+                    "secondary-container": "#fad3fd",
+                    "primary-fixed-dim": "#e7bbc6",
+                    "surface-tint": "#78555e",
+                    "secondary-fixed": "#fcd7ff",
+                    "surface-container-highest": "#e5e2e1",
+                    "outline": "#817476",
+                    "on-tertiary-fixed": "#001f23",
+                    "on-surface": "#1c1b1b",
+                    "inverse-surface": "#313030",
+                    "on-error": "#ffffff",
+                    "tertiary": "#37656b",
+                    "on-primary-fixed-variant": "#5e3e47",
+                    "on-tertiary-fixed-variant": "#1d4d53",
+                    "secondary-fixed-dim": "#dfbbe4",
+                    "inverse-on-surface": "#f3f0ef",
+                    "surface-container-high": "#eae7e7",
+                    "on-secondary": "#ffffff",
+                    "on-surface-variant": "#4f4446",
+                    "tertiary-fixed-dim": "#9fcfd5",
+                    "background": "#fcf9f8",
+                    "on-primary-container": "#7a5761",
+                    "primary": "#78555e",
+                    "error": "#ba1a1a",
+                    "surface-dim": "#dcd9d9",
+                    "surface-bright": "#fcf9f8",
+                    "on-error-container": "#93000a",
+                    "surface-variant": "#e5e2e1",
+                    "surface-container-low": "#f6f3f2",
+                    "error-container": "#ffdad6"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "base": "4px",
+                    "md": "24px",
+                    "lg": "40px",
+                    "margin-mobile": "20px",
+                    "margin-desktop": "auto",
+                    "xs": "8px",
+                    "gutter": "16px",
+                    "sm": "16px",
+                    "xl": "64px"
+            },
+            "fontFamily": {
+                    "label-bold": [
+                            "Inter"
+                    ],
+                    "body-md": [
+                            "Inter"
+                    ],
+                    "label-sm": [
+                            "Inter"
+                    ],
+                    "display-lg-mobile": [
+                            "Quicksand"
+                    ],
+                    "headline-sm": [
+                            "Quicksand"
+                    ],
+                    "display-lg": [
+                            "Quicksand"
+                    ],
+                    "body-lg": [
+                            "Inter"
+                    ],
+                    "body-sm": [
+                            "Inter"
+                    ],
+                    "headline-md": [
+                            "Quicksand"
+                    ]
+            },
+            "fontSize": {
+                    "label-bold": [
+                            "14px",
+                            {
+                                    "lineHeight": "16px",
+                                    "letterSpacing": "0.05em",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "body-md": [
+                            "16px",
+                            {
+                                    "lineHeight": "24px",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "label-sm": [
+                            "12px",
+                            {
+                                    "lineHeight": "16px",
+                                    "fontWeight": "500"
+                            }
+                    ],
+                    "display-lg-mobile": [
+                            "32px",
+                            {
+                                    "lineHeight": "40px",
+                                    "letterSpacing": "-0.01em",
+                                    "fontWeight": "700"
+                            }
+                    ],
+                    "headline-sm": [
+                            "20px",
+                            {
+                                    "lineHeight": "28px",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "display-lg": [
+                            "48px",
+                            {
+                                    "lineHeight": "56px",
+                                    "letterSpacing": "-0.02em",
+                                    "fontWeight": "700"
+                            }
+                    ],
+                    "body-lg": [
+                            "18px",
+                            {
+                                    "lineHeight": "28px",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "body-sm": [
+                            "14px",
+                            {
+                                    "lineHeight": "20px",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "headline-md": [
+                            "24px",
+                            {
+                                    "lineHeight": "32px",
+                                    "fontWeight": "700"
+                            }
+                    ]
+            }
+    },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+          font-variation-settings:
+          'FILL' 1,
+          'wght' 400,
+          'GRAD' 0,
+          'opsz' 24
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col pt-20">
+<!-- TopNavBar -->
+<nav class="bg-surface/70 backdrop-blur-xl border-b-2 border-on-background shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] fixed top-0 w-full z-50 flex justify-between items-center px-margin-desktop h-20 max-w-[1200px] mx-auto left-0 right-0">
+<div class="font-display-lg text-display-lg text-primary">Fotbarin</div>
+<div class="hidden md:flex gap-sm items-center">
+<a class="text-on-surface-variant font-body-md hover:text-primary transition-colors" href="#">Templates</a>
+<a class="text-on-surface-variant font-body-md hover:text-primary transition-colors" href="#">Community</a>
+<a class="text-primary font-label-bold border-b-2 border-primary hover:text-primary transition-colors" href="#">Pricing</a>
+<a class="text-on-surface-variant font-body-md hover:text-primary transition-colors" href="#">Login</a>
+<button class="bg-primary-container text-on-primary-container font-label-bold px-md py-xs rounded-xl border-2 border-on-background shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] active:translate-y-0.5 active:translate-x-0.5 active:shadow-none transition-all ml-md">Start Shooting</button>
+</div>
+<button class="md:hidden p-2 text-on-surface"><span class="material-symbols-outlined">menu</span></button>
+</nav>
+<!-- Main Content -->
+<main class="flex-grow flex flex-col items-center justify-center py-xl px-margin-mobile md:px-margin-desktop max-w-[1200px] mx-auto w-full gap-xl">
+<!-- Header -->
+<div class="text-center flex flex-col gap-sm max-w-2xl">
+<h1 class="font-display-lg-mobile md:font-display-lg text-display-lg-mobile md:text-display-lg text-on-background">Choose Your Vibe</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Upgrade your digital photobooth experience. More stickers, more frames, more fun.</p>
+</div>
+<!-- Toggle -->
+<div class="flex items-center gap-sm bg-surface-container-high p-1 rounded-full border-2 border-on-background shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
+<button class="px-md py-xs rounded-full font-label-bold bg-primary-container text-on-primary-container border-2 border-on-background shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all" id="monthly-btn">Monthly</button>
+<button class="px-md py-xs rounded-full font-label-bold text-on-surface-variant hover:text-primary transition-all flex items-center gap-xs" id="yearly-btn">Yearly <span class="bg-tertiary-container text-on-tertiary-container text-[10px] px-2 py-0.5 rounded-full border border-on-background">-20%</span></button>
+</div>
+<!-- Pricing Cards Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-lg w-full max-w-4xl">
+<!-- Free Plan -->
+<div class="bg-surface-container-lowest rounded-xl border-2 border-on-background shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] p-md flex flex-col gap-md">
+<div class="flex flex-col gap-xs">
+<h2 class="font-headline-md text-headline-md text-on-background">Free</h2>
+<div class="font-display-lg-mobile text-display-lg-mobile text-on-background">Rp 0 <span class="font-body-md text-body-md text-on-surface-variant">/ forever</span></div>
+</div>
+<div class="h-px bg-outline-variant w-full"></div>
+<ul class="flex flex-col gap-sm flex-grow">
+<li class="flex items-center gap-xs font-body-md text-body-md text-on-background">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                        Use built-in templates
+                    </li>
+<li class="flex items-center gap-xs font-body-md text-body-md text-on-background">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                        Use community templates
+                    </li>
+<li class="flex items-center gap-xs font-body-md text-body-md text-on-background">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                        Download photo strips
+                    </li>
+<li class="flex items-center gap-xs font-body-md text-body-md text-on-surface-variant opacity-70">
+<span class="material-symbols-outlined">cancel</span>
+                        No photo storage
+                    </li>
+</ul>
+<button class="w-full py-sm rounded-xl font-label-bold text-on-surface-variant bg-surface-container-high border-2 border-on-background hover:bg-surface-container transition-colors mt-auto">Current Plan</button>
+</div>
+<!-- Premium Plan -->
+<div class="bg-primary-container rounded-xl border-2 border-on-background shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] p-md flex flex-col gap-md relative transform md:-translate-y-4">
+<!-- Badge -->
+<div class="absolute -top-4 -right-4 bg-tertiary-container text-on-tertiary-container font-label-bold px-sm py-xs rounded-full border-2 border-on-background shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] rotate-12 flex items-center gap-1 z-10">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span> Best Value
+                </div>
+<div class="flex flex-col gap-xs">
+<h2 class="font-headline-md text-headline-md text-on-primary-container">Premium</h2>
+<div class="font-display-lg-mobile text-display-lg-mobile text-on-primary-container">
+<span id="price-display">Rp 19.000</span> <span class="font-body-md text-body-md text-on-primary-container opacity-80">/ month</span>
+</div>
+</div>
+<div class="h-px bg-on-primary-container opacity-20 w-full"></div>
+<ul class="flex flex-col gap-sm flex-grow">
+<li class="flex items-center gap-xs font-body-md text-body-md text-on-primary-container">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">palette</span>
+                        Create custom frames
+                    </li>
+<li class="flex items-center gap-xs font-body-md text-body-md text-on-primary-container">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">save</span>
+                        Save private frames
+                    </li>
+<li class="flex items-center gap-xs font-body-md text-body-md text-on-primary-container">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">public</span>
+                        Publish to community
+                    </li>
+<li class="flex items-center gap-xs font-body-md text-body-md text-on-primary-container">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">emoji_emotions</span>
+                        Upload custom stickers
+                    </li>
+<li class="flex items-center gap-xs font-body-md text-body-md text-on-primary-container">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">workspace_premium</span>
+                        Premium creator badge
+                    </li>
+<li class="flex items-center gap-xs font-body-md text-body-md text-on-primary-container">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">high_quality</span>
+                        Higher quality export
+                    </li>
+</ul>
+<button class="w-full py-sm rounded-xl font-label-bold text-on-primary bg-primary border-2 border-on-background shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] active:translate-y-0.5 active:translate-x-0.5 active:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all mt-auto flex items-center justify-center gap-xs">
+                    Upgrade to Premium
+                    <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container dark:bg-surface-dim border-t-2 border-on-background dark:border-outline-variant w-full py-md px-margin-desktop flex flex-col md:flex-row justify-between items-center gap-sm mt-auto max-w-[1200px] mx-auto">
+<div class="font-label-bold text-label-bold text-on-surface">© 2024 Fotbarin</div>
+<div class="flex gap-sm">
+<a class="text-on-surface-variant font-body-sm hover:text-primary transition-colors duration-200" href="#">Privacy</a>
+<a class="text-on-surface-variant font-body-sm hover:text-primary transition-colors duration-200" href="#">Terms</a>
+<a class="text-on-surface-variant font-body-sm hover:text-primary transition-colors duration-200" href="#">Contact</a>
+</div>
+</footer>
+<!-- BottomNavBar (Mobile Only - Suppressed per rules for transactional/settings-like pages if strict, but requested in prompt to use shared navs. Since Pricing is a top-level nav item in TopAppBar, we don't render it in BottomNav as it's not in the JSON labels array. However, we suppress BottomNav anyway as it's not a primary destination from the BottomNav's perspective.) -->
+<script>
+        // Simple toggle logic
+        const monthlyBtn = document.getElementById('monthly-btn');
+        const yearlyBtn = document.getElementById('yearly-btn');
+        const priceDisplay = document.getElementById('price-display');
+
+        monthlyBtn.addEventListener('click', () => {
+            monthlyBtn.classList.add('bg-primary-container', 'text-on-primary-container', 'border-2', 'border-on-background', 'shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]');
+            monthlyBtn.classList.remove('text-on-surface-variant');
+            
+            yearlyBtn.classList.remove('bg-primary-container', 'text-on-primary-container', 'border-2', 'border-on-background', 'shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]');
+            yearlyBtn.classList.add('text-on-surface-variant');
+            
+            priceDisplay.textContent = 'Rp 19.000';
+        });
+
+        yearlyBtn.addEventListener('click', () => {
+            yearlyBtn.classList.add('bg-primary-container', 'text-on-primary-container', 'border-2', 'border-on-background', 'shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]');
+            yearlyBtn.classList.remove('text-on-surface-variant');
+            
+            monthlyBtn.classList.remove('bg-primary-container', 'text-on-primary-container', 'border-2', 'border-on-background', 'shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]');
+            monthlyBtn.classList.add('text-on-surface-variant');
+            
+            priceDisplay.textContent = 'Rp 182.400'; // Assuming roughly 20% off 228k
+        });
+    </script>
+</body></html>
