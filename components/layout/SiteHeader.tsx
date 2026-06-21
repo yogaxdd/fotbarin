@@ -16,7 +16,6 @@ const navItems = [
 ] as const
 
 const accountMenuItems = [
-  { href: '/admin', label: 'Admin', icon: 'admin_panel_settings' },
   { href: '/settings', label: 'Setting', icon: 'settings' },
 ] as const
 
@@ -27,7 +26,7 @@ type SiteHeaderProps = {
 export default function SiteHeader({ rightAccessory }: SiteHeaderProps) {
   const pathname = usePathname()
   const router = useRouter()
-  const { user, loading, displayName, profileComplete, profileHref, isPremium } = useAuth()
+  const { user, loading, displayName, profileComplete, profileHref, isPremium, isAdmin } = useAuth()
   const { copy } = useI18n()
   const [menuOpen, setMenuOpen] = useState(false)
   const [accountMenuOpen, setAccountMenuOpen] = useState(false)
@@ -154,6 +153,16 @@ export default function SiteHeader({ rightAccessory }: SiteHeaderProps) {
                         <span className="material-symbols-outlined text-[20px]">person</span>
                         My Profil
                       </Link>
+                      {isAdmin && (
+                        <Link
+                          href="/admin"
+                          className="account-menu-item flex items-center gap-3 rounded-2xl px-3 py-2.5 text-sm font-bold text-[oklch(35%_0.09_70)] hover:bg-[oklch(96.5%_0.035_78)] focus-visible:bg-[oklch(96.5%_0.035_78)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+                          role="menuitem"
+                        >
+                          <span className="material-symbols-outlined text-[20px]">admin_panel_settings</span>
+                          Admin panel
+                        </Link>
+                      )}
                       {accountMenuItems.map((item) => (
                         <Link
                           key={item.href}
@@ -307,6 +316,19 @@ export default function SiteHeader({ rightAccessory }: SiteHeaderProps) {
                         <span className="material-symbols-outlined text-[20px]">person</span>
                         My Profil
                       </Link>
+                      {isAdmin && (
+                        <Link
+                          href="/admin"
+                          onClick={() => {
+                            setAccountMenuOpen(false)
+                            setMenuOpen(false)
+                          }}
+                          className="flex items-center gap-3 rounded-2xl px-3 py-3 text-sm font-bold text-[oklch(35%_0.09_70)] transition hover:bg-[oklch(96.5%_0.035_78)]"
+                        >
+                          <span className="material-symbols-outlined text-[20px]">admin_panel_settings</span>
+                          Admin panel
+                        </Link>
+                      )}
                       {accountMenuItems.map((item) => (
                         <Link
                           key={item.href}

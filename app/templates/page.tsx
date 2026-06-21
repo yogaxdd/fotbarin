@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { useEffect, useMemo, useState } from 'react'
+import { useAuth } from '@/components/auth/AuthProvider'
 import DashboardShell from '@/components/layout/DashboardShell'
 import { useI18n } from '@/components/i18n/I18nProvider'
 import { starterThemes, type PhotoStripTheme } from '@/lib/frame-renderer'
@@ -128,6 +129,7 @@ function TemplateRail({ row, rowIndex }: { row: ManagedTemplateRow; rowIndex: nu
 
 export default function TemplatesPage() {
   const { copy } = useI18n()
+  const { isAdmin } = useAuth()
   const [content, setContent] = useState<SiteContent>(defaultSiteContent)
 
   useEffect(() => {
@@ -155,9 +157,11 @@ export default function TemplatesPage() {
         <div className="motion-rise rounded-[1.5rem] bg-primary-container p-5 text-on-primary-container" style={{ animationDelay: '140ms' }}>
           <p className="font-extrabold">{copy.templates.launchTarget}</p>
           <p className="mt-2 text-sm font-semibold leading-6">{copy.templates.launchText}</p>
-          <Link href="/admin" className="mt-4 inline-flex rounded-full bg-white px-4 py-2 text-sm font-extrabold text-primary shadow-sm transition hover:-translate-y-0.5">
-            Kelola konten
-          </Link>
+          {isAdmin && (
+            <Link href="/admin" className="mt-4 inline-flex rounded-full bg-white px-4 py-2 text-sm font-extrabold text-primary shadow-sm transition hover:-translate-y-0.5">
+              Kelola konten
+            </Link>
+          )}
         </div>
       </section>
 

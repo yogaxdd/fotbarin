@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
-import { doc, updateDoc } from 'firebase/firestore'
+import { doc, setDoc } from 'firebase/firestore'
 import { useAuth } from '@/components/auth/AuthProvider'
 import SiteHeader from '@/components/layout/SiteHeader'
 import { useI18n } from '@/components/i18n/I18nProvider'
@@ -17,6 +17,7 @@ export default function PricingPage() {
   const { user, profileComplete, profileHref, isPremium, canClaimTrial, refreshProfile } = useAuth()
   const [billing, setBilling] = useState<BillingCycle>('monthly')
   const [activatingTrial, setActivatingTrial] = useState(false)
+  const [activatingPurchase, setActivatingPurchase] = useState(false)
   const [trialError, setTrialError] = useState('')
   const premiumPrice = billing === 'monthly' ? copy.pricing.premiumPlan.monthlyPrice : copy.pricing.premiumPlan.yearlyPrice
   const premiumPeriod = billing === 'monthly' ? copy.pricing.month : copy.pricing.year
@@ -36,11 +37,11 @@ export default function PricingPage() {
     try {
       const expiresAt = Date.now() + 24 * 60 * 60 * 1000
 
-      await updateDoc(doc(db, 'users', user.uid), {
+      await setDoc(doc(db, 'users', user.uid), {
         isPremium: true,
         premiumExpiresAt: expiresAt,
         trialUsed: true,
-      })
+      }, { merge: true })
 
       await refreshProfile()
       router.push(profileHref)
@@ -48,6 +49,34 @@ export default function PricingPage() {
       setTrialError('Trial belum berhasil diaktifkan. Coba lagi sebentar ya.')
     } finally {
       setActivatingTrial(false)
+    }
+  }
+
+  const activateMockPurchase = async () => {
+    if (!user || !profileComplete) {
+      router.push('/login')
+      return
+    }
+
+    if (isPremium) return
+
+    setActivatingPurchase(true)
+    setTrialError('')
+
+    try {
+      const expiresAt = Date.now() + 30 * 24 * 60 * 60 * 1000
+
+      await setDoc(doc(db, 'users', user.uid), {
+        isPremium: true,
+        premiumExpiresAt: expiresAt,
+      }, { merge: true })
+
+      await refreshProfile()
+      router.push(profileHref)
+    } catch {
+      setTrialError('Premium belum berhasil diaktifkan. Coba lagi sebentar ya.')
+    } finally {
+      setActivatingPurchase(false)
     }
   }
 
@@ -171,11 +200,12 @@ export default function PricingPage() {
             ) : user && profileComplete ? (
               <button
                 type="button"
-                disabled
-                className="mt-8 inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-on-background/70 px-5 py-3.5 text-sm font-extrabold text-white shadow-sm disabled:cursor-not-allowed"
+                onClick={activateMockPurchase}
+                disabled={activatingPurchase}
+                className="mt-8 inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-on-background px-5 py-3.5 text-sm font-extrabold text-white shadow-sm transition duration-200 hover:-translate-y-0.5 hover:bg-primary hover:shadow-sticker disabled:cursor-not-allowed disabled:translate-y-0 disabled:opacity-70"
               >
-                Trial sudah dipakai
-                <span className="material-symbols-outlined text-[18px]">lock</span>
+                <span className="material-symbols-outlined text-[18px]" style={{ fontVariationSettings: `'FILL' 1` }}>workspace_premium</span>
+                {activatingPurchase ? 'Mengaktifkan Premium…' : 'Beli Premium'}
               </button>
             ) : (
               <Link href={upgradeHref} className="mt-8 inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-primary px-5 py-3.5 text-sm font-extrabold text-white shadow-sm transition duration-200 hover:-translate-y-0.5 hover:bg-on-background hover:shadow-sticker">

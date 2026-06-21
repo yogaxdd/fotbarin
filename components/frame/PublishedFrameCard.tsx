@@ -6,17 +6,24 @@ import { frameSlotCount } from '@/lib/community-frames'
 type PublishedFrameCardProps = {
   frame: PublishedFrame
   compact?: boolean
+  onSelect?: (frame: PublishedFrame) => void
 }
 
-export default function PublishedFrameCard({ frame, compact = false }: PublishedFrameCardProps) {
+export default function PublishedFrameCard({ frame, compact = false, onSelect }: PublishedFrameCardProps) {
   const slotCount = frameSlotCount(frame)
   const createdAt = new Intl.DateTimeFormat('id-ID', { day: '2-digit', month: 'short' }).format(new Date(frame.createdAt))
+  const hasFrameOverlay = frame.elements.some((element) => element.kind === 'frame')
 
-  return (
-    <article className="overflow-hidden rounded-xl border-2 border-on-background bg-white shadow-[4px_4px_0_0_rgba(0,0,0,1)] transition hover:-translate-y-0.5">
-      <div className="relative aspect-[3/4] bg-[radial-gradient(circle_at_20%_12%,oklch(93%_0.045_350),transparent_45%),radial-gradient(circle_at_90%_28%,oklch(92%_0.04_205),transparent_42%),linear-gradient(180deg,white,oklch(98.5%_0.006_330))]">
+  const cardClassName = 'block w-full overflow-hidden rounded-xl border-2 border-on-background bg-white text-left shadow-[4px_4px_0_0_rgba(0,0,0,1)] transition hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2'
+  const content = (
+    <>
+      <div className="relative bg-[radial-gradient(circle_at_20%_12%,oklch(93%_0.045_350),transparent_45%),radial-gradient(circle_at_90%_28%,oklch(92%_0.04_205),transparent_42%),linear-gradient(180deg,white,oklch(98.5%_0.006_330))]" style={{ aspectRatio: `${frame.canvas.width} / ${frame.canvas.height}` }}>
         <div className="absolute inset-3 overflow-hidden rounded-[1.1rem] border border-black/10 bg-white/72">
-          {frame.elements.map((element) => {
+          {!hasFrameOverlay && <div className="absolute inset-3 rounded-[0.9rem] border border-dashed border-primary/20" />}
+          {[...frame.elements].sort((a, b) => {
+            const order = { slot: 0, text: 1, sticker: 2, frame: 3 }
+            return order[a.kind] - order[b.kind]
+          }).map((element) => {
             const style = {
               left: `${(element.x / frame.canvas.width) * 100}%`,
               top: `${(element.y / frame.canvas.height) * 100}%`,
@@ -41,6 +48,17 @@ export default function PublishedFrameCard({ frame, compact = false }: Published
               )
             }
 
+            if (element.kind === 'frame') {
+              return (
+                <div key={element.id} className="absolute grid place-items-center" style={style}>
+                  {element.src && (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img src={element.src} alt="" className="h-full w-full object-fill" style={{ opacity: element.opacity ?? 1 }} />
+                  )}
+                </div>
+              )
+            }
+
             return (
               <div key={element.id} className="absolute grid place-items-center" style={style}>
                 {element.src ? (
@@ -52,7 +70,7 @@ export default function PublishedFrameCard({ frame, compact = false }: Published
               </div>
             )
           })}
-          <div className="absolute bottom-3 left-5 right-5 rounded-full bg-white/90 py-1 text-center text-[10px] font-extrabold text-primary shadow-sm">Fotbarin</div>
+          {!hasFrameOverlay && <div className="absolute bottom-3 left-5 right-5 rounded-full bg-white/90 py-1 text-center text-[10px] font-extrabold text-primary shadow-sm">Fotbarin</div>}
         </div>
         <span className="absolute right-2 top-2 rounded-full bg-white/92 px-2 py-1 text-[11px] font-extrabold text-primary shadow-sm">{frame.status === 'published' ? 'Live' : 'Review'}</span>
       </div>
@@ -64,6 +82,16 @@ export default function PublishedFrameCard({ frame, compact = false }: Published
           <span className="shrink-0 text-xs font-extrabold text-primary">{createdAt}</span>
         </div>
       </div>
-    </article>
+    </>
   )
+
+  if (onSelect) {
+    return (
+      <button type="button" onClick={() => onSelect(frame)} className={cardClassName}>
+        {content}
+      </button>
+    )
+  }
+
+  return <article className={cardClassName}>{content}</article>
 }

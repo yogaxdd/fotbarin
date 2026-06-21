@@ -14,6 +14,11 @@ export type UserProfile = {
   photoURL?: string | null
   provider?: string
   isPremium?: boolean
+  isAdmin?: boolean
+  isBanned?: boolean
+  banReason?: string
+  bannedAt?: unknown
+  bannedBy?: string
   premiumExpiresAt?: number
   trialUsed?: boolean
 }
@@ -28,6 +33,8 @@ type AuthContextValue = {
   username: string
   profileHref: string
   isPremium: boolean
+  isAdmin: boolean
+  isBanned: boolean
   canClaimTrial: boolean
   refreshProfile: () => Promise<void>
 }
@@ -79,7 +86,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const displayName = profile?.name || user?.displayName || 'pengguna Fotbarin'
   const profileComplete = Boolean(user && profile?.name && profile?.username)
   const profileHref = username ? `/${username}` : '/login'
-  const isPremium = Boolean(user && profile?.isPremium && profile?.premiumExpiresAt && profile.premiumExpiresAt > now)
+  const isAdmin = Boolean(user && profile?.isAdmin)
+  const isPremium = Boolean(user && (isAdmin || (profile?.isPremium && profile?.premiumExpiresAt && profile.premiumExpiresAt > now)))
+  const isBanned = Boolean(user && profile?.isBanned)
   const canClaimTrial = Boolean(user && profile && !profile.trialUsed)
 
   const value = useMemo(
@@ -93,10 +102,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       username,
       profileHref,
       isPremium,
+      isAdmin,
+      isBanned,
       canClaimTrial,
       refreshProfile,
     }),
-    [canClaimTrial, displayName, isPremium, loading, profile, profileComplete, profileHref, profileLoading, user, username],
+    [canClaimTrial, displayName, isAdmin, isBanned, isPremium, loading, profile, profileComplete, profileHref, profileLoading, user, username],
   )
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>

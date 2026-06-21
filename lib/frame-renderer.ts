@@ -1,3 +1,5 @@
+import type { PublishedFrame, SavedFrameElement } from '@/lib/community-frames'
+
 export type PhotoStripTheme = {
   id: string
   name: string
@@ -130,6 +132,67 @@ function drawImageCover(
   ctx.drawImage(image, sx, sy, sw, sh, x, y, width, height)
 }
 
+function drawImageContain(
+  ctx: CanvasRenderingContext2D,
+  image: HTMLImageElement,
+  x: number,
+  y: number,
+  width: number,
+  height: number,
+) {
+  const imageRatio = image.naturalWidth / image.naturalHeight
+  const targetRatio = width / height
+  let dw = width
+  let dh = height
+  let dx = x
+  let dy = y
+
+  if (imageRatio > targetRatio) {
+    dh = width / imageRatio
+    dy = y + (height - dh) / 2
+  } else {
+    dw = height * imageRatio
+    dx = x + (width - dw) / 2
+  }
+
+  ctx.drawImage(image, dx, dy, dw, dh)
+}
+
+function drawImageFill(
+  ctx: CanvasRenderingContext2D,
+  image: HTMLImageElement,
+  x: number,
+  y: number,
+  width: number,
+  height: number,
+) {
+  ctx.drawImage(image, x, y, width, height)
+}
+
+function drawImageWithFit(
+  ctx: CanvasRenderingContext2D,
+  image: HTMLImageElement,
+  element: SavedFrameElement,
+  scale: number,
+) {
+  const x = element.x * scale
+  const y = element.y * scale
+  const width = element.width * scale
+  const height = element.height * scale
+
+  if (element.fit === 'contain') {
+    drawImageContain(ctx, image, x, y, width, height)
+    return
+  }
+
+  if (element.fit === 'fill') {
+    drawImageFill(ctx, image, x, y, width, height)
+    return
+  }
+
+  drawImageCover(ctx, image, x, y, width, height)
+}
+
 function loadImage(src: string) {
   return new Promise<HTMLImageElement>((resolve, reject) => {
     const image = new Image()
@@ -246,6 +309,72 @@ export async function renderFourCutStrip(photoDataUrls: string[], theme: PhotoSt
   ctx.font = '700 22px Nunito Sans, sans-serif'
   ctx.fillStyle = theme.pattern === 'stars' ? 'rgba(255, 247, 250, 0.78)' : theme.accent
   ctx.fillText(privacyFooter, canvas.width / 2, canvas.height - 42)
+
+  return canvas
+}
+
+export async function renderCommunityFrameStrip(photoDataUrls: string[], frame: PublishedFrame) {
+  const scale = 2
+  const canvas = document.createElement('canvas')
+  canvas.width = frame.canvas.width * scale
+  canvas.height = frame.canvas.height * scale
+
+  const ctx = canvas.getContext('2d')
+  if (!ctx) {
+    throw new Error('Canvas is not supported in this browser.')
+  }
+
+  ctx.fillStyle = '#ffffff'
+  ctx.fillRect(0, 0, canvas.width, canvas.height)
+
+  const slots = frame.elements.filter((element) => element.kind === 'slot')
+  const photoImages = await Promise.all(photoDataUrls.slice(0, slots.length).map((src) => loadImage(src)))
+  const assetSources = frame.elements
+    .filter((element) => element.kind !== 'slot' && element.src)
+    .map((element) => [element.id, element.src] as const)
+  const loadedAssets = new Map(await Promise.all(assetSources.map(async ([id, src]) => [id, await loadImage(src ?? '')] as const)))
+
+  frame.elements.forEach((element) => {
+    ctx.save()
+    const x = element.x * scale
+    const y = element.y * scale
+    const width = element.width * scale
+    const height = element.height * scale
+    ctx.translate(x + width / 2, y + height / 2)
+    ctx.rotate((element.rotation * Math.PI) / 180)
+    ctx.translate(-width / 2, -height / 2)
+
+    if (element.kind === 'slot') {
+      const slotIndex = slots.findIndex((slot) => slot.id === element.id)
+      const image = photoImages[slotIndex]
+      drawRoundedRect(ctx, 0, 0, width, height, (element.radius ?? 0) * scale)
+      ctx.clip()
+      if (image) {
+        drawImageWithFit(ctx, image, { ...element, x: 0, y: 0, width: element.width, height: element.height }, scale)
+      } else {
+        ctx.fillStyle = '#ffffff'
+        ctx.fillRect(0, 0, width, height)
+      }
+    }
+
+    if (element.kind === 'text') {
+      ctx.fillStyle = element.color ?? '#2a1820'
+      ctx.font = `${element.weight ?? 800} ${(element.fontSize ?? 24) * scale}px Nunito Sans, sans-serif`
+      ctx.textAlign = 'center'
+      ctx.textBaseline = 'middle'
+      ctx.fillText(element.text ?? '', width / 2, height / 2)
+    }
+
+    if ((element.kind === 'sticker' || element.kind === 'frame') && element.src) {
+      const image = loadedAssets.get(element.id)
+      if (image) {
+        ctx.globalAlpha = element.kind === 'frame' ? (element.opacity ?? 1) : 1
+        ctx.drawImage(image, 0, 0, width, height)
+      }
+    }
+
+    ctx.restore()
+  })
 
   return canvas
 }

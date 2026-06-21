@@ -1,4 +1,4 @@
-export type SavedFrameElementKind = 'slot' | 'text' | 'sticker'
+export type SavedFrameElementKind = 'slot' | 'text' | 'sticker' | 'frame'
 
 export type SavedFrameElement = {
   id: string
@@ -17,6 +17,7 @@ export type SavedFrameElement = {
   weight?: 700 | 800
   src?: string
   symbol?: string
+  opacity?: number
 }
 
 export type PublishedFrame = {
@@ -35,6 +36,7 @@ export type PublishedFrame = {
 }
 
 export const COMMUNITY_FRAMES_STORAGE_KEY = 'fotbarin:community-frames:v1'
+export const COMMUNITY_FRAME_SELECTION_KEY = 'fotbarin:selected-community-frame'
 export const COMMUNITY_FRAMES_UPDATED_EVENT = 'fotbarin:community-frames-updated'
 
 function isBrowser() {

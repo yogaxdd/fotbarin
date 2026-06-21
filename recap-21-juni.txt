@@ -1,0 +1,108 @@
+Recap Fotbarin - 21 Juni 2026
+
+Hari ini fokusnya bikin flow custom frame / photostrip premium sampai bisa dipakai dari Community ke booth.
+
+1. Frame editor premium
+- Editor frame awalnya masih campur dashboard/community dan terlalu rame.
+- Dirombak jadi workspace editor sendiri ala Canva:
+  - topbar tipis,
+  - tool rail kiri,
+  - panel Upload/Template/Elemen/Teks/Layer,
+  - canvas putih kosong di tengah,
+  - properties panel kanan hanya muncul saat layer dipilih.
+- Editor sekarang mulai kosong, bukan langsung berisi slot/text/sticker default.
+- Upload photostrip PNG premium dipindah ke panel Unggahan dan empty state canvas.
+- Saat upload PNG/WebP photostrip transparan:
+  - PNG masuk sebagai overlay depan,
+  - otomatis dibuat 3 photo slot di belakang frame,
+  - slot bisa digeser/resize/edit radius/fit,
+  - overlay bisa diatur opacity.
+- Canvas editor dibuat mengikuti rasio photostrip seperti 941 x 1672 px.
+- Scroll workspace diperbaiki supaya canvas/panel tidak nyangkut.
+
+2. Layer dan properties editor
+- Tambah jenis layer baru: frame.
+- Existing layer: slot, text, sticker tetap dipakai.
+- Urutan render layer dibuat benar:
+  - photo slot di belakang,
+  - text/sticker di tengah,
+  - frame overlay di depan.
+- Properties panel diperbaiki karena input X/Y/W/H sebelumnya overflow/amburadul:
+  - panel kanan jadi 320px,
+  - input transform pakai w-full/min-w-0,
+  - panel kanan overflow-x-hidden.
+
+3. Community frame card
+- Card frame di halaman Community awalnya tidak bisa diklik.
+- PublishedFrameCard ditambah support onSelect.
+- Kalau onSelect ada, card jadi button accessible dan bisa diklik.
+- Klik card sekarang membuka modal/detail frame.
+- Modal detail menampilkan:
+  - preview photostrip,
+  - judul frame,
+  - creator name + username,
+  - deskripsi,
+  - jumlah slot,
+  - ukuran canvas,
+  - status live,
+  - tombol “Buat dengan template ini”.
+
+4. Pakai template dari Community ke Shoot
+- Tombol “Buat dengan template ini” awalnya hanya redirect ke /shoot, tapi template belum terpilih.
+- Sekarang frame pilihan disimpan ke localStorage dengan key:
+  fotbarin:selected-community-frame
+- /shoot sekarang membaca frame Community terpilih.
+- Kalau ada frame Community terpilih:
+  - frame tersebut muncul sebagai selected di panel Frame,
+  - jumlah slot mengikuti template, contoh Sakura = 3 slot,
+  - preview/export memakai renderer frame Community, bukan Rose Studio default.
+- Kalau user pilih theme bawaan lagi, selection Community dibersihkan dan balik ke 4 slot default.
+
+5. Renderer frame Community
+- Ditambahkan renderCommunityFrameStrip di lib/frame-renderer.ts.
+- Renderer ini menggambar:
+  - background putih,
+  - foto ke dalam photo slot sesuai fit mode,
+  - text layer,
+  - sticker layer,
+  - frame overlay PNG di depan.
+- Output download sekarang bisa memakai frame custom Community.
+
+6. Premium / admin / pricing
+- Admin otomatis dianggap premium:
+  - isAdmin true => isPremium true.
+- Logic ada di components/auth/AuthProvider.tsx.
+- Pricing trial diperbaiki:
+  - trial sekarang pakai setDoc(..., { merge: true }) supaya lebih aman daripada updateDoc.
+  - kalau trial sudah dipakai, tombol tidak disabled lagi.
+  - tombol berubah jadi “Beli Premium”.
+  - sementara sebelum payment gateway, “Beli Premium” mengaktifkan premium mock/gratis 30 hari.
+
+7. Hasil akhir yang sudah terlihat
+- Frame Sakura transparan berhasil dipakai.
+- Photo slot otomatis pas di belakang 3 lubang frame.
+- Foto hasil booth bisa dirender ke photostrip Sakura dengan overlay frame depan.
+- Flow utama sudah nyambung:
+  Frame editor -> Publish -> Community -> Detail modal -> Buat dengan template ini -> Shoot -> Export.
+
+Catatan teknis
+- Beberapa kali npm run build tidak bisa dijalankan karena permission classifier Bash sedang unavailable dari harness, bukan karena output error build.
+- Perlu build/test manual setelah dev server normal:
+  npm run build
+- Perlu hard refresh/restart dev server kalau browser masih menampilkan versi lama.
+
+File utama yang banyak berubah
+- components/frame/FrameEditorClient.tsx
+- components/frame/PublishedFrameCard.tsx
+- app/community/page.tsx
+- components/camera/ShootClient.tsx
+- lib/frame-renderer.ts
+- lib/community-frames.ts
+- app/pricing/page.tsx
+- components/auth/AuthProvider.tsx
+
+Follow-up berikutnya yang bagus
+- Auto-detect lubang transparan PNG dari alpha channel, supaya slot benar-benar otomatis untuk semua bentuk frame, bukan preset 3-slot.
+- Integrasi payment gateway beneran untuk tombol Beli Premium.
+- Simpan/pakai frame Community tidak hanya localStorage, tapi route/query atau backend state.
+- Polish mobile editor supaya tool panel tetap nyaman di layar kecil.

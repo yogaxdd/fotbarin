@@ -43,7 +43,7 @@ function TemplatePreview({ themeId }: { themeId: string }) {
 }
 
 export default function BerandaPage() {
-  const { displayName, user, profileComplete, profileHref, isPremium } = useAuth()
+  const { displayName, user, profileComplete, profileHref, isPremium, isAdmin } = useAuth()
   const router = useRouter()
   const [hour, setHour] = useState<number | null>(null)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
@@ -212,6 +212,12 @@ export default function BerandaPage() {
                           <span className="material-symbols-outlined text-[20px]">person</span>
                           My Profil
                         </Link>
+                        {isAdmin && (
+                          <Link href="/admin" className="account-menu-item flex items-center gap-3 rounded-2xl px-3 py-2.5 text-sm font-bold text-[oklch(35%_0.09_70)] hover:bg-[oklch(96.5%_0.035_78)] focus-visible:bg-[oklch(96.5%_0.035_78)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2" role="menuitem">
+                            <span className="material-symbols-outlined text-[20px]">admin_panel_settings</span>
+                            Admin panel
+                          </Link>
+                        )}
                         <Link href="/settings" className="account-menu-item flex items-center gap-3 rounded-2xl px-3 py-2.5 text-sm font-bold text-on-surface-variant hover:bg-primary-container hover:text-on-primary-container focus-visible:bg-primary-container focus-visible:text-on-primary-container focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2" role="menuitem">
                           <span className="material-symbols-outlined text-[20px]">settings</span>
                           Setting

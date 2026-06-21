@@ -4,9 +4,10 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import DashboardShell from '@/components/layout/DashboardShell'
 import { useI18n } from '@/components/i18n/I18nProvider'
 import { formatMessage } from '@/lib/i18n'
-import { downloadCanvasAsPng, renderFourCutStrip, starterThemes } from '@/lib/frame-renderer'
+import { downloadCanvasAsPng, renderCommunityFrameStrip, renderFourCutStrip, starterThemes } from '@/lib/frame-renderer'
+import { COMMUNITY_FRAME_SELECTION_KEY, frameSlotCount, type PublishedFrame } from '@/lib/community-frames'
 
-const SLOT_COUNT = 4
+const DEFAULT_SLOT_COUNT = 4
 
 type CameraStatus = 'idle' | 'loading' | 'ready' | 'error'
 
@@ -21,7 +22,8 @@ export default function ShootClient() {
   const [cameraError, setCameraError] = useState('')
   const [facingMode, setFacingMode] = useState<'user' | 'environment'>('user')
   const [mirrorPreview, setMirrorPreview] = useState(true)
-  const [photos, setPhotos] = useState<(string | null)[]>(Array(SLOT_COUNT).fill(null))
+  const [selectedCommunityFrame, setSelectedCommunityFrame] = useState<PublishedFrame | null>(null)
+  const [photos, setPhotos] = useState<(string | null)[]>(Array(DEFAULT_SLOT_COUNT).fill(null))
   const [activeSlot, setActiveSlot] = useState(0)
   const [countdown, setCountdown] = useState<number | null>(null)
   const [isCapturing, setIsCapturing] = useState(false)
@@ -33,9 +35,10 @@ export default function ShootClient() {
     () => starterThemes.find((theme) => theme.id === selectedThemeId) ?? starterThemes[0],
     [selectedThemeId],
   )
+  const slotCount = selectedCommunityFrame ? frameSlotCount(selectedCommunityFrame) : DEFAULT_SLOT_COUNT
 
   const completedCount = photos.filter(Boolean).length
-  const isComplete = completedCount === SLOT_COUNT
+  const isComplete = completedCount === slotCount
 
   const stopCamera = useCallback(() => {
     streamRef.current?.getTracks().forEach((track) => track.stop())
@@ -89,6 +92,22 @@ export default function ShootClient() {
   }, [startCamera, stopCamera])
 
   useEffect(() => {
+    try {
+      const rawFrame = window.localStorage.getItem(COMMUNITY_FRAME_SELECTION_KEY)
+      if (!rawFrame) return
+
+      const frame = JSON.parse(rawFrame) as PublishedFrame
+      const nextSlotCount = Math.max(1, frameSlotCount(frame))
+      setSelectedCommunityFrame(frame)
+      setPhotos(Array(nextSlotCount).fill(null))
+      setActiveSlot(0)
+      setStripPreviewUrl(null)
+    } catch {
+      window.localStorage.removeItem(COMMUNITY_FRAME_SELECTION_KEY)
+    }
+  }, [])
+
+  useEffect(() => {
     let cancelled = false
 
     async function updatePreview() {
@@ -99,7 +118,9 @@ export default function ShootClient() {
 
       setIsRendering(true)
       try {
-        const canvas = await renderFourCutStrip(photos as string[], selectedTheme, copy.export.privacyFooter)
+        const canvas = selectedCommunityFrame
+          ? await renderCommunityFrameStrip(photos as string[], selectedCommunityFrame)
+          : await renderFourCutStrip(photos as string[], selectedTheme, copy.export.privacyFooter)
         if (!cancelled) {
           setStripPreviewUrl(canvas.toDataURL('image/png'))
         }
@@ -115,7 +136,7 @@ export default function ShootClient() {
     return () => {
       cancelled = true
     }
-  }, [copy.export.privacyFooter, isComplete, photos, selectedTheme])
+  }, [copy.export.privacyFooter, isComplete, photos, selectedCommunityFrame, selectedTheme])
 
   function sleep(ms: number) {
     return new Promise((resolve) => window.setTimeout(resolve, ms))
@@ -160,7 +181,7 @@ export default function ShootClient() {
       await runCountdown()
       const photo = snapPhoto()
       setPhotos((current) => current.map((item, index) => (index === slotIndex ? photo : item)))
-      setActiveSlot(Math.min(slotIndex + 1, SLOT_COUNT - 1))
+      setActiveSlot(Math.min(slotIndex + 1, slotCount - 1))
     } catch (error) {
       setCameraError(error instanceof Error ? error.message : copy.shoot.captureFailed)
     } finally {
@@ -174,7 +195,7 @@ export default function ShootClient() {
 
     setIsCapturing(true)
     try {
-      for (let slotIndex = 0; slotIndex < SLOT_COUNT; slotIndex += 1) {
+      for (let slotIndex = 0; slotIndex < slotCount; slotIndex += 1) {
         if (photos[slotIndex]) continue
         setActiveSlot(slotIndex)
         await runCountdown()
@@ -195,15 +216,17 @@ export default function ShootClient() {
 
     setIsRendering(true)
     try {
-      const canvas = await renderFourCutStrip(photos as string[], selectedTheme, copy.export.privacyFooter)
-      downloadCanvasAsPng(canvas, `fotbarin-${selectedTheme.id}.png`)
+      const canvas = selectedCommunityFrame
+        ? await renderCommunityFrameStrip(photos as string[], selectedCommunityFrame)
+        : await renderFourCutStrip(photos as string[], selectedTheme, copy.export.privacyFooter)
+      downloadCanvasAsPng(canvas, `fotbarin-${selectedCommunityFrame?.id ?? selectedTheme.id}.png`)
     } finally {
       setIsRendering(false)
     }
   }
 
   function resetSession() {
-    setPhotos(Array(SLOT_COUNT).fill(null))
+    setPhotos(Array(slotCount).fill(null))
     setStripPreviewUrl(null)
     setActiveSlot(0)
     setCountdown(null)
@@ -214,8 +237,17 @@ export default function ShootClient() {
     setFacingMode((current) => (current === 'user' ? 'environment' : 'user'))
   }
 
+  function selectStarterTheme(themeId: string) {
+    setSelectedCommunityFrame(null)
+    window.localStorage.removeItem(COMMUNITY_FRAME_SELECTION_KEY)
+    setSelectedThemeId(themeId)
+    setPhotos(Array(DEFAULT_SLOT_COUNT).fill(null))
+    setStripPreviewUrl(null)
+    setActiveSlot(0)
+  }
+
   function handleUploadFallback(event: React.ChangeEvent<HTMLInputElement>) {
-    const files = Array.from(event.target.files ?? []).slice(0, SLOT_COUNT)
+    const files = Array.from(event.target.files ?? []).slice(0, slotCount)
     if (files.length === 0) return
 
     const readers = files.map(
@@ -233,7 +265,7 @@ export default function ShootClient() {
         setPhotos((current) => {
           const next = [...current]
           let uploadIndex = 0
-          for (let index = 0; index < SLOT_COUNT && uploadIndex < uploadedPhotos.length; index += 1) {
+          for (let index = 0; index < slotCount && uploadIndex < uploadedPhotos.length; index += 1) {
             if (!next[index]) {
               next[index] = uploadedPhotos[uploadIndex]
               uploadIndex += 1
@@ -343,7 +375,7 @@ export default function ShootClient() {
               </div>
 
               <div className="absolute left-3 top-3 rounded-full bg-white/88 px-3 py-1.5 text-sm font-bold text-on-background shadow-sm backdrop-blur">
-                {formatMessage(copy.shoot.slotOf, { current: activeSlot + 1, total: SLOT_COUNT })}
+                {formatMessage(copy.shoot.slotOf, { current: activeSlot + 1, total: slotCount })}
               </div>
 
               {countdown !== null && (
@@ -396,7 +428,7 @@ export default function ShootClient() {
                     ? copy.shoot.startCountdown
                     : isComplete
                       ? copy.shoot.allCaptured
-                      : formatMessage(copy.shoot.captureRemaining, { count: SLOT_COUNT - completedCount })}
+                      : formatMessage(copy.shoot.captureRemaining, { count: slotCount - completedCount })}
               </button>
               <button onClick={() => fileInputRef.current?.click()} className="rounded-full border border-outline-variant bg-white px-5 py-3.5 text-sm font-bold text-on-background shadow-sm transition hover:bg-surface-container-low">
                 {copy.common.upload}
@@ -415,22 +447,37 @@ export default function ShootClient() {
                 <h2 className="text-lg font-extrabold tracking-tight">{copy.shoot.frameTitle}</h2>
                 <p className="text-sm text-on-surface-variant">{copy.shoot.frameSubtitle}</p>
               </div>
-              <span className="rounded-full bg-surface-container-low px-3 py-1 text-xs font-bold text-on-surface-variant">{selectedTheme.tag}</span>
+              <span className="rounded-full bg-surface-container-low px-3 py-1 text-xs font-bold text-on-surface-variant">{selectedCommunityFrame ? 'Community' : selectedTheme.tag}</span>
             </div>
 
             <div className="grid gap-2 lg:max-h-[440px] lg:overflow-y-auto lg:pr-1">
+              {selectedCommunityFrame && (
+                <button
+                  type="button"
+                  className="flex items-center gap-3 rounded-2xl border border-primary bg-primary-container p-3 text-left transition"
+                >
+                  <span className="grid h-10 w-10 place-items-center rounded-xl border border-primary/20 bg-white text-primary">
+                    <span className="material-symbols-outlined text-[20px]">dashboard_customize</span>
+                  </span>
+                  <span className="min-w-0 flex-1">
+                    <span className="block truncate font-bold text-on-background">{selectedCommunityFrame.name}</span>
+                    <span className="block text-sm text-on-surface-variant">@{selectedCommunityFrame.creatorUsername} · {slotCount} slot</span>
+                  </span>
+                  <span className="text-sm font-bold text-primary">{copy.common.selected}</span>
+                </button>
+              )}
               {starterThemes.map((theme) => (
                 <button
                   key={theme.id}
-                  onClick={() => setSelectedThemeId(theme.id)}
-                  className={`flex items-center gap-3 rounded-2xl border p-3 text-left transition ${selectedThemeId === theme.id ? 'border-primary bg-primary-container' : 'border-outline-variant bg-white hover:bg-surface-container-low'}`}
+                  onClick={() => selectStarterTheme(theme.id)}
+                  className={`flex items-center gap-3 rounded-2xl border p-3 text-left transition ${!selectedCommunityFrame && selectedThemeId === theme.id ? 'border-primary bg-primary-container' : 'border-outline-variant bg-white hover:bg-surface-container-low'}`}
                 >
                   <span className="h-10 w-10 rounded-xl border border-black/10" style={{ backgroundColor: theme.background }} />
                   <span className="min-w-0 flex-1">
                     <span className="block font-bold text-on-background">{theme.name}</span>
                     <span className="block text-sm text-on-surface-variant">{theme.tag} · 4-cut</span>
                   </span>
-                  {selectedThemeId === theme.id && <span className="text-sm font-bold text-primary">{copy.common.selected}</span>}
+                  {!selectedCommunityFrame && selectedThemeId === theme.id && <span className="text-sm font-bold text-primary">{copy.common.selected}</span>}
                 </button>
               ))}
             </div>
@@ -440,7 +487,7 @@ export default function ShootClient() {
             <div className="mb-4 flex items-center justify-between gap-3">
               <div>
                 <h2 className="text-lg font-extrabold tracking-tight">{copy.shoot.exportTitle}</h2>
-                <p className="text-sm text-on-surface-variant">{formatMessage(copy.shoot.photosReady, { current: completedCount, total: SLOT_COUNT })}</p>
+                <p className="text-sm text-on-surface-variant">{formatMessage(copy.shoot.photosReady, { current: completedCount, total: slotCount })}</p>
               </div>
               {isComplete && <span className="rounded-full bg-success-container px-3 py-1 text-xs font-bold text-success">{copy.shoot.ready}</span>}
             </div>
@@ -473,7 +520,7 @@ export default function ShootClient() {
               disabled={!isComplete || isRendering}
               className="mt-4 w-full rounded-full bg-on-background px-5 py-3.5 text-sm font-bold text-white shadow-sm transition hover:-translate-y-0.5 hover:shadow-sticker disabled:pointer-events-none disabled:opacity-50"
             >
-              {isRendering ? copy.shoot.rendering : isComplete ? copy.shoot.downloadPng : formatMessage(copy.shoot.needMore, { count: SLOT_COUNT - completedCount })}
+              {isRendering ? copy.shoot.rendering : isComplete ? copy.shoot.downloadPng : formatMessage(copy.shoot.needMore, { count: slotCount - completedCount })}
             </button>
 
             <p className="mt-3 text-sm leading-6 text-on-surface-variant">{copy.shoot.exportMirrorNote}</p>
@@ -500,7 +547,7 @@ export default function ShootClient() {
                 ? copy.shoot.capturing
                 : completedCount === 0
                   ? copy.shoot.startCountdown
-                  : formatMessage(copy.shoot.captureMore, { count: SLOT_COUNT - completedCount })}
+                  : formatMessage(copy.shoot.captureMore, { count: slotCount - completedCount })}
           </button>
           <button
             onClick={() => fileInputRef.current?.click()}
